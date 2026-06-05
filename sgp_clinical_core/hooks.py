@@ -1,249 +1,83 @@
-app_name = "sgp_clinical_core"
-app_title = "SGP Clinical Core"
-app_publisher = "Sai Ganga Panakeia"
-app_description = "Integrative Clinical Core for SGP ERP"
-app_email = "sgpsmm@sgprs.com"
-app_license = "mit"
+"""
+ERPNext Hooks — sgp_clinical_core/hooks.py
+───────────────────────────────────────────
+This file belongs inside the ERPNext custom app: sgp_clinical_core
 
-# Apps
-# ------------------
+Location on your Frappe server:
+  /apps/sgp_clinical_core/sgp_clinical_core/hooks.py
 
-# required_apps = []
+These hooks fire server-side Python inside ERPNext and send webhook
+notifications to the FastAPI automation engine when relevant documents change.
 
-# Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "sgp_clinical_core",
-# 		"logo": "/assets/sgp_clinical_core/logo.png",
-# 		"title": "SGP Clinical Core",
-# 		"route": "/sgp_clinical_core",
-# 		"has_permission": "sgp_clinical_core.api.permission.has_app_permission"
-# 	}
-# ]
+HOW TO APPLY:
+  1. Copy this content into your existing hooks.py
+  2. bench restart
+  3. bench --site your-site.com migrate  (if adding new scheduled jobs)
 
-# Includes in <head>
-# ------------------
+IMPORTANT:
+  - doc_events fire synchronously inside ERPNext — keep them fast.
+  - The actual HTTP call to FastAPI is done via a background job (enqueue)
+    to avoid slowing down the ERPNext save operation.
+"""
 
-# include js, css files in header of desk.html
-# app_include_css = "/assets/sgp_clinical_core/css/sgp_clinical_core.css"
-# app_include_js = "/assets/sgp_clinical_core/js/sgp_clinical_core.js"
+app_name        = "sgp_clinical_core"
+app_title       = "SGP Clinical Core"
+app_publisher   = "SGP"
+app_description = "Clinical core for SGP hospital automation"
+app_email       = "dev@sgp.com"
+app_license     = "MIT"
 
-# include js, css files in header of web template
-# web_include_css = "/assets/sgp_clinical_core/css/sgp_clinical_core.css"
-# web_include_js = "/assets/sgp_clinical_core/js/sgp_clinical_core.js"
+# ── Document Event Hooks ──────────────────────────────────────────────────────
+# These trigger the FastAPI notification when ERPNext documents are saved.
 
-# include custom scss in every website theme (without file extension ".scss")
-# website_theme_scss = "sgp_clinical_core/public/scss/website"
+doc_events = {
 
-# include js, css files in header of web form
-# webform_include_js = {"doctype": "public/js/doctype.js"}
-# webform_include_css = {"doctype": "public/css/doctype.css"}
+    # SGP Lead: notify FastAPI whenever a lead status changes
+    "SGP Lead": {
+        "on_update":    "sgp_clinical_core.integrations.fastapi_notifier.on_lead_update",
+        "after_insert": "sgp_clinical_core.integrations.fastapi_notifier.on_lead_insert",
+    },
 
-# include js in page
-# page_js = {"page" : "public/js/file.js"}
+    # Patient Appointment: notify FastAPI when a new appointment is booked
+    "Patient Appointment": {
+        "after_insert": "sgp_clinical_core.integrations.fastapi_notifier.on_appointment_insert",
+        "on_update":    "sgp_clinical_core.integrations.fastapi_notifier.on_appointment_update",
+    },
 
-# include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
-# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
-# doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
-# doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
+    # SGP Encounter: notify FastAPI on status transitions
+    "SGP Encounter": {
+        "on_update":    "sgp_clinical_core.integrations.fastapi_notifier.on_encounter_update",
+        "on_submit":    "sgp_clinical_core.integrations.fastapi_notifier.on_encounter_submit",
+    },
+}
 
-# Svg Icons
-# ------------------
-# include app icons in desk
-# app_include_icons = "sgp_clinical_core/public/icons.svg"
+# ── Scheduled Jobs ────────────────────────────────────────────────────────────
+# Runs in the ERPNext background worker (bench worker)
 
-# Home Pages
-# ----------
+scheduler_events = {
+    # Every 5 minutes: retry any failed FastAPI notification calls
+    "cron": {
+        "*/5 * * * *": [
+            "sgp_clinical_core.integrations.fastapi_notifier.retry_failed_notifications",
+        ]
+    },
+    # Daily: sync lead count summary to FastAPI (optional reporting)
+    "daily": [
+        "sgp_clinical_core.integrations.fastapi_notifier.daily_lead_sync",
+    ],
+}
 
-# application home page (will override Website Settings)
-# home_page = "login"
-
-# website user home page (by Role)
-# role_home_page = {
-# 	"Role": "home_page"
-# }
-
-# Generators
-# ----------
-
-# automatically create page for each record of this doctype
-# website_generators = ["Web Page"]
-
-# Jinja
-# ----------
-
-# add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "sgp_clinical_core.utils.jinja_methods",
-# 	"filters": "sgp_clinical_core.utils.jinja_filters"
-# }
-
-# Installation
-# ------------
-
-# before_install = "sgp_clinical_core.install.before_install"
-# after_install = "sgp_clinical_core.install.after_install"
-
-# Uninstallation
-# ------------
-
-# before_uninstall = "sgp_clinical_core.uninstall.before_uninstall"
-# after_uninstall = "sgp_clinical_core.uninstall.after_uninstall"
-
-# Integration Setup
-# ------------------
-# To set up dependencies/integrations with other apps
-# Name of the app being installed is passed as an argument
-
-# before_app_install = "sgp_clinical_core.utils.before_app_install"
-# after_app_install = "sgp_clinical_core.utils.after_app_install"
-
-# Integration Cleanup
-# -------------------
-# To clean up dependencies/integrations with other apps
-# Name of the app being uninstalled is passed as an argument
-
-# before_app_uninstall = "sgp_clinical_core.utils.before_app_uninstall"
-# after_app_uninstall = "sgp_clinical_core.utils.after_app_uninstall"
-
-# Desk Notifications
-# ------------------
-# See frappe.core.notifications.get_notification_config
-
-# notification_config = "sgp_clinical_core.notifications.get_notification_config"
-
-# Permissions
-# -----------
-# Permissions evaluated in scripted ways
-
-# permission_query_conditions = {
-# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
-# }
-#
-# has_permission = {
-# 	"Event": "frappe.desk.doctype.event.event.has_permission",
-# }
-
-# DocType Class
-# ---------------
-# Override standard doctype classes
-
-# override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
-# }
-
-# Document Events
-# ---------------
-# Hook on document methods and events
-
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
-
-# Scheduled Tasks
-# ---------------
-
-# scheduler_events = {
-# 	"all": [
-# 		"sgp_clinical_core.tasks.all"
-# 	],
-# 	"daily": [
-# 		"sgp_clinical_core.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"sgp_clinical_core.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"sgp_clinical_core.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"sgp_clinical_core.tasks.monthly"
-# 	],
-# }
-
-# Testing
-# -------
-
-# before_tests = "sgp_clinical_core.install.before_tests"
-
-# Overriding Methods
-# ------------------------------
-#
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "sgp_clinical_core.event.get_events"
-# }
-#
-# each overriding function accepts a `data` argument;
-# generated from the base implementation of the doctype dashboard,
-# along with any modifications made in other Frappe apps
-# override_doctype_dashboards = {
-# 	"Task": "sgp_clinical_core.task.get_dashboard_data"
-# }
-
-# exempt linked doctypes from being automatically cancelled
-#
-# auto_cancel_exempted_doctypes = ["Auto Repeat"]
-
-# Ignore links to specified DocTypes when deleting documents
-# -----------------------------------------------------------
-
-# ignore_links_on_delete = ["Communication", "ToDo"]
-
-# Request Events
-# ----------------
-# before_request = ["sgp_clinical_core.utils.before_request"]
-# after_request = ["sgp_clinical_core.utils.after_request"]
-
-# Job Events
-# ----------
-# before_job = ["sgp_clinical_core.utils.before_job"]
-# after_job = ["sgp_clinical_core.utils.after_job"]
-
-# User Data Protection
-# --------------------
-
-# user_data_fields = [
-# 	{
-# 		"doctype": "{doctype_1}",
-# 		"filter_by": "{filter_by}",
-# 		"redact_fields": ["{field_1}", "{field_2}"],
-# 		"partial": 1,
-# 	},
-# 	{
-# 		"doctype": "{doctype_2}",
-# 		"filter_by": "{filter_by}",
-# 		"partial": 1,
-# 	},
-# 	{
-# 		"doctype": "{doctype_3}",
-# 		"strict": False,
-# 	},
-# 	{
-# 		"doctype": "{doctype_4}"
-# 	}
-# ]
-
-# Authentication and authorization
-# --------------------------------
-
-# auth_hooks = [
-# 	"sgp_clinical_core.auth.validate"
-# ]
-
-# Automatically update python controller files with type annotations for this app.
-# export_python_type_annotations = True
-
-# default_log_clearing_doctypes = {
-# 	"Logging DocType Name": 30  # days to retain logs
-# }
-
-# Translation
-# ------------
-# List of apps whose translatable strings should be excluded from this app's translations.
-# ignore_translatable_strings_from = []
-
+# ── Fixtures (auto-export these DocTypes with bench export-fixtures) ──────────
+fixtures = [
+    {"dt": "Custom Field", "filters": [["dt", "in", [
+        "SGP Lead",
+        "SGP Orientation Session",
+        "SGP Orientation Attendance",
+        "SGP Encounter",
+        "Patient",
+    ]]]},
+    {"dt": "Property Setter", "filters": [["doc_type", "in", [
+        "SGP Lead",
+        "SGP Encounter",
+    ]]]},
+]

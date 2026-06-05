@@ -1,0 +1,292 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2026-02-13 14:03:11.779003",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "patient",
+  "appointment",
+  "lead",
+  "encounter_date",
+  "doctor",
+  "case_type",
+  "status",
+  "consent_verified",
+  "naming_series",
+  "custom_payment_entry",
+  "amended_from",
+  "custom_paid_amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "SGP-ENC-.YYYY.-.#####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "patient",
+   "fieldtype": "Link",
+   "label": "Patient",
+   "options": "Patient",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "doctor",
+   "fieldtype": "Link",
+   "label": "Practitioner",
+   "options": "Healthcare Practitioner",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "encounter_date",
+   "fieldtype": "Datetime",
+   "label": "Encounter Date",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nUnder Review\nApproved\nClosed",
+   "default": "Draft",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "case_type",
+   "fieldtype": "Select",
+   "label": "Case Type",
+   "options": "\nAyurvedic\nAllopathic\nIntegrated"
+  },
+  {
+   "fieldname": "lead",
+   "fieldtype": "Link",
+   "label": "SGP Lead",
+   "options": "SGP Lead"
+  },
+  {
+   "fieldname": "appointment",
+   "fieldtype": "Link",
+   "label": "Appointment",
+   "options": "Patient Appointment"
+  },
+  {
+   "fieldname": "consent_verified",
+   "fieldtype": "Check",
+   "label": "Consent Verified"
+  },
+  {
+   "fieldname": "chief_complaint_sec",
+   "fieldtype": "Section Break",
+   "label": "Chief Complaint"
+  },
+  {
+   "fieldname": "chief_complaint",
+   "fieldtype": "Small Text",
+   "label": "Chief Complaint"
+  },
+  {
+   "fieldname": "anamnesis",
+   "fieldtype": "Text",
+   "label": "Anamnesis"
+  },
+  {
+   "fieldname": "clinical_sec",
+   "fieldtype": "Section Break",
+   "label": "Clinical Assessment"
+  },
+  {
+   "fieldname": "vpk_dominance",
+   "fieldtype": "Data",
+   "label": "VPK Dominance"
+  },
+  {
+   "fieldname": "pulse_diagnosis",
+   "fieldtype": "Small Text",
+   "label": "Pulse Diagnosis"
+  },
+  {
+   "fieldname": "col_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "ayurvedic_diagnosis",
+   "fieldtype": "Small Text",
+   "label": "Ayurvedic Diagnosis"
+  },
+  {
+   "fieldname": "allopathic_diagnosis",
+   "fieldtype": "Small Text",
+   "label": "Allopathic Diagnosis"
+  },
+  {
+   "fieldname": "review_of_systems",
+   "fieldtype": "Small Text",
+   "label": "Review of Systems"
+  },
+  {
+   "fieldname": "systemic_examination",
+   "fieldtype": "Small Text",
+   "label": "Systemic Examination"
+  },
+  {
+   "fieldname": "treatment_sec",
+   "fieldtype": "Section Break",
+   "label": "Treatment"
+  },
+  {
+   "fieldname": "sgp_rx",
+   "fieldtype": "Text",
+   "label": "SGP Supplements (Rx)"
+  },
+  {
+   "fieldname": "allopathic_medicines",
+   "fieldtype": "Text",
+   "label": "Allopathic Medicines"
+  },
+  {
+   "fieldname": "col_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "panchakarma",
+   "fieldtype": "Text",
+   "label": "Panchakarma"
+  },
+  {
+   "fieldname": "home_remedies",
+   "fieldtype": "Small Text",
+   "label": "Home Remedies"
+  },
+  {
+   "fieldname": "diet_sec",
+   "fieldtype": "Section Break",
+   "label": "Diet & Lifestyle"
+  },
+  {
+   "fieldname": "diet_include",
+   "fieldtype": "Small Text",
+   "label": "Diet \u2014 Include"
+  },
+  {
+   "fieldname": "diet_exclude",
+   "fieldtype": "Small Text",
+   "label": "Diet \u2014 Exclude"
+  },
+  {
+   "fieldname": "col_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "lifestyle_advice",
+   "fieldtype": "Small Text",
+   "label": "Lifestyle Advice"
+  },
+  {
+   "fieldname": "investigations_advised",
+   "fieldtype": "Small Text",
+   "label": "Investigations Advised"
+  },
+  {
+   "fieldname": "history_sec",
+   "fieldtype": "Section Break",
+   "label": "Patient History"
+  },
+  {
+   "fieldname": "personal_history_diet",
+   "fieldtype": "Small Text",
+   "label": "Diet History"
+  },
+  {
+   "fieldname": "personal_history_sleep",
+   "fieldtype": "Data",
+   "label": "Sleep (hrs/night)"
+  },
+  {
+   "fieldname": "col_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "past_medical_history",
+   "fieldtype": "Small Text",
+   "label": "Past Medical History"
+  },
+  {
+   "fieldname": "family_history",
+   "fieldtype": "Small Text",
+   "label": "Family History"
+  },
+  {
+   "fieldname": "allergies",
+   "fieldtype": "Small Text",
+   "label": "Allergies"
+  },
+  {
+   "fieldname": "followup_sec",
+   "fieldtype": "Section Break",
+   "label": "Follow Up & Prognosis"
+  },
+  {
+   "fieldname": "follow_up",
+   "fieldtype": "Small Text",
+   "label": "Follow Up Plan"
+  },
+  {
+   "fieldname": "prognosis",
+   "fieldtype": "Small Text",
+   "label": "Prognosis"
+  },
+  {
+   "fieldname": "notes_sec",
+   "fieldtype": "Section Break",
+   "label": "Raw Casesheet JSON"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Long Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "SGP Encounter",
+   "no_copy": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-04-29 12:58:00.703136",
+ "modified_by": "Administrator",
+ "module": "SGP Clinical Core",
+ "name": "SGP Encounter",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Administrator",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

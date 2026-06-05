@@ -1,0 +1,122 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-03-03 10:55:11.012640",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "session_link_section",
+  "orientation_session",
+  "lead",
+  "patient",
+  "watch_metrics_section",
+  "joined_at",
+  "left_at",
+  "watch_minutes",
+  "min_required_minutes",
+  "orientation_completed",
+  "automation_flags_section",
+  "appointment_eligible"
+ ],
+ "fields": [
+  {
+   "fieldname": "session_link_section",
+   "fieldtype": "Section Break",
+   "label": "Session Link"
+  },
+  {
+   "fieldname": "orientation_session",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Orientation Session",
+   "options": "SGP Orientation Session",
+   "reqd": 1
+  },
+  {
+   "fieldname": "lead",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Lead",
+   "options": "SGP Lead",
+   "reqd": 1
+  },
+  {
+   "fieldname": "patient",
+   "fieldtype": "Link",
+   "label": "Patient",
+   "options": "Patient"
+  },
+  {
+   "fieldname": "watch_metrics_section",
+   "fieldtype": "Section Break",
+   "label": "Watch Metrics"
+  },
+  {
+   "fieldname": "joined_at",
+   "fieldtype": "Datetime",
+   "label": "Joined at"
+  },
+  {
+   "fieldname": "left_at",
+   "fieldtype": "Datetime",
+   "label": "Left at"
+  },
+  {
+   "fieldname": "watch_minutes",
+   "fieldtype": "Int",
+   "label": "Total Watch Minutes",
+   "read_only": 1
+  },
+  {
+   "fieldname": "min_required_minutes",
+   "fieldtype": "Int",
+   "label": "Minimum Required Minutes"
+  },
+  {
+   "default": "0",
+   "fieldname": "orientation_completed",
+   "fieldtype": "Check",
+   "label": "Orientation Completed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "automation_flags_section",
+   "fieldtype": "Section Break",
+   "label": "Automation Flags"
+  },
+  {
+   "default": "0",
+   "fieldname": "appointment_eligible",
+   "fieldtype": "Check",
+   "label": "Appointment Eligible",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-03-03 11:03:47.537718",
+ "modified_by": "Administrator",
+ "module": "SGP Clinical Core",
+ "name": "SGP Orientation Attendance",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

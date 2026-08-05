@@ -8,6 +8,10 @@
  "field_order": [
   "tab_history",
   "patient",
+  "patient_name",
+  "age",
+  "gender",
+  "mobile",
   "appointment",
   "lead",
   "encounter_date",
@@ -105,6 +109,31 @@
    "options": "Patient",
    "reqd": 1,
    "in_list_view": 1
+  },
+  {
+   "fetch_from": "patient.patient_name",
+   "fieldname": "patient_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Patient Name"
+  },
+  {
+   "fieldname": "age",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Age"
+  },
+  {
+   "fetch_from": "patient.sex",
+   "fieldname": "gender",
+   "fieldtype": "Data",
+   "label": "Gender"
+  },
+  {
+   "fetch_from": "patient.mobile",
+   "fieldname": "mobile",
+   "fieldtype": "Data",
+   "label": "Mobile"
   },
   {
    "fieldname": "doctor",

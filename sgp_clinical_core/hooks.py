@@ -81,3 +81,8 @@ fixtures = [
         "SGP Encounter",
     ]]]},
 ]
+jinja = {
+    "methods": [
+        "sgp_clinical_core.jinja_helpers.parse_notes_json"
+    ]
+}

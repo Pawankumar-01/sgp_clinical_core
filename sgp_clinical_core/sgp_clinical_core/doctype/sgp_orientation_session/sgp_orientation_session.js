@@ -1,6 +1,6 @@
 // SGP Orientation Session — Client Script
 
-const FASTAPI_BASE = "http://182.18.178.234:8001/api/v1";
+const FASTAPI_BASE = "http://122.175.42.237:8001/api/v1";
 
 frappe.ui.form.on("SGP Orientation Session", {
 
@@ -9,7 +9,7 @@ frappe.ui.form.on("SGP Orientation Session", {
     // ── Join as Host ───────────────────────────────────────────────────────
     if (frm.doc.room_name) {
       frm.add_custom_button("🩺 Join as Host", () => {
-        const hostUrl = `http://182.18.178.234:8001/meet/host.html?session=${frm.doc.room_name}&name=${encodeURIComponent(frappe.session.user)}`;
+        const hostUrl = `http://122.175.42.237:8001/meet/host.html?session=${frm.doc.room_name}&name=${encodeURIComponent(frappe.session.user)}`;
         window.open(hostUrl, "_blank");
       }, "Actions");
     }
@@ -22,7 +22,7 @@ frappe.ui.form.on("SGP Orientation Session", {
     // ── Copy Patient Join Link ─────────────────────────────────────────────
     if (frm.doc.room_name) {
       frm.add_custom_button("🔗 Copy Patient Join Link", () => {
-        const link = `http://182.18.178.234:8001/meet/index.html?session=${frm.doc.room_name}`;
+        const link = `http://122.175.42.237:8001/meet/index.html?session=${frm.doc.room_name}`;
         navigator.clipboard.writeText(link);
         frappe.show_alert({ message: "Join link copied!", indicator: "green" });
       }, "Actions");
@@ -32,8 +32,8 @@ frappe.ui.form.on("SGP Orientation Session", {
     if (frm.doc.room_name) {
       frm.set_intro(
         `<b>Session ID:</b> ${frm.doc.room_name}<br>
-         <b>Patient Join:</b> http://182.18.178.234:8001/meet/index.html?session=${frm.doc.room_name}<br>
-         <b>Host Join:</b> http://182.18.178.234:8001/meet/host.html?session=${frm.doc.room_name}`,
+         <b>Patient Join:</b> http://122.175.42.237/:8001/meet/index.html?session=${frm.doc.room_name}<br>
+         <b>Host Join:</b> http://122.175.42.237:8001/meet/host.html?session=${frm.doc.room_name}`,
         "blue"
       );
     }

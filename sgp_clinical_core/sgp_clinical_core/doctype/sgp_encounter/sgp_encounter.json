@@ -6,6 +6,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "tab_history",
   "patient",
   "appointment",
   "lead",
@@ -21,6 +22,17 @@
   "chief_complaint_sec",
   "chief_complaint",
   "anamnesis",
+  "history_sec",
+  "past_medical_history",
+  "medication_history",
+  "col_break_4",
+  "surgical_history",
+  "menstrual_obstetric_history",
+  "family_history",
+  "allergies",
+  "personal_history_diet",
+  "personal_history_sleep",
+  "tab_exam",
   "vitals_sec",
   "height_cm",
   "weight_kg",
@@ -33,6 +45,10 @@
   "waist_cm",
   "fore_arm_cm",
   "hip_cm",
+  "exam_sec",
+  "general_examination",
+  "col_break_exam",
+  "systemic_examination",
   "clinical_sec",
   "vpk_dominance",
   "pulse_diagnosis",
@@ -40,33 +56,41 @@
   "ayurvedic_diagnosis",
   "allopathic_diagnosis",
   "review_of_systems",
-  "systemic_examination",
+  "investigation_reports",
+  "tab_treatment",
   "treatment_sec",
   "sgp_rx",
-  "allopathic_medicines",
-  "col_break_2",
   "panchakarma",
-  "home_remedies",
+  "col_break_2",
+  "allopathic_medicines",
+  "detox_procedures",
   "diet_sec",
   "diet_include",
   "diet_exclude",
   "col_break_3",
+  "exercises_yoga",
+  "home_remedies",
   "lifestyle_advice",
   "investigations_advised",
-  "history_sec",
-  "personal_history_diet",
-  "personal_history_sleep",
-  "col_break_4",
-  "past_medical_history",
-  "family_history",
-  "allergies",
+  "tab_summary",
+  "rx_summary_sec",
+  "rx_quick_summary",
+  "rx_daily_regimen",
   "followup_sec",
   "follow_up",
+  "col_break_followup",
+  "followup_doc",
   "prognosis",
+  "tab_raw",
   "notes_sec",
   "notes"
  ],
  "fields": [
+  {
+   "fieldname": "tab_history",
+   "fieldtype": "Tab Break",
+   "label": "Context & History"
+  },
   {
    "fieldname": "naming_series",
    "fieldtype": "Select",
@@ -139,6 +163,13 @@
    "label": "Paid Amount"
   },
   {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "SGP Encounter"
+  },
+  {
    "fieldname": "chief_complaint_sec",
    "fieldtype": "Section Break",
    "label": "Chief Complaint"
@@ -152,6 +183,60 @@
    "fieldname": "anamnesis",
    "fieldtype": "Text",
    "label": "Anamnesis"
+  },
+  {
+   "fieldname": "history_sec",
+   "fieldtype": "Section Break",
+   "label": "Comprehensive Patient History"
+  },
+  {
+   "fieldname": "past_medical_history",
+   "fieldtype": "Small Text",
+   "label": "Past Medical History"
+  },
+  {
+   "fieldname": "medication_history",
+   "fieldtype": "Small Text",
+   "label": "Medication & Treatment History"
+  },
+  {
+   "fieldname": "col_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "surgical_history",
+   "fieldtype": "Small Text",
+   "label": "Surgical & Hospitalization History"
+  },
+  {
+   "fieldname": "menstrual_obstetric_history",
+   "fieldtype": "Small Text",
+   "label": "Menstrual / Obstetric History"
+  },
+  {
+   "fieldname": "family_history",
+   "fieldtype": "Small Text",
+   "label": "Family History"
+  },
+  {
+   "fieldname": "allergies",
+   "fieldtype": "Small Text",
+   "label": "Allergies"
+  },
+  {
+   "fieldname": "personal_history_diet",
+   "fieldtype": "Small Text",
+   "label": "Diet History"
+  },
+  {
+   "fieldname": "personal_history_sleep",
+   "fieldtype": "Data",
+   "label": "Sleep (hrs/night)"
+  },
+  {
+   "fieldname": "tab_exam",
+   "fieldtype": "Tab Break",
+   "label": "Examination & Nadi Pariksha"
   },
   {
    "fieldname": "vitals_sec",
@@ -213,9 +298,28 @@
    "label": "Hip (cm)"
   },
   {
+   "fieldname": "exam_sec",
+   "fieldtype": "Section Break",
+   "label": "Physical Examination"
+  },
+  {
+   "fieldname": "general_examination",
+   "fieldtype": "Small Text",
+   "label": "General Examination"
+  },
+  {
+   "fieldname": "col_break_exam",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "systemic_examination",
+   "fieldtype": "Small Text",
+   "label": "Systemic Examination"
+  },
+  {
    "fieldname": "clinical_sec",
    "fieldtype": "Section Break",
-   "label": "Clinical Assessment"
+   "label": "Diagnostic Assessment & Nadi Pariksha"
   },
   {
    "fieldname": "vpk_dominance",
@@ -247,14 +351,19 @@
    "label": "Review of Systems"
   },
   {
-   "fieldname": "systemic_examination",
+   "fieldname": "investigation_reports",
    "fieldtype": "Small Text",
-   "label": "Systemic Examination"
+   "label": "Investigation Reports (Brought)"
+  },
+  {
+   "fieldname": "tab_treatment",
+   "fieldtype": "Tab Break",
+   "label": "Treatment & Regimen"
   },
   {
    "fieldname": "treatment_sec",
    "fieldtype": "Section Break",
-   "label": "Treatment"
+   "label": "Prescriptions & Panchakarma"
   },
   {
    "fieldname": "sgp_rx",
@@ -262,28 +371,28 @@
    "label": "SGP Supplements (Rx)"
   },
   {
-   "fieldname": "allopathic_medicines",
+   "fieldname": "panchakarma",
    "fieldtype": "Text",
-   "label": "Allopathic Medicines"
+   "label": "Panchakarma"
   },
   {
    "fieldname": "col_break_2",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "panchakarma",
+   "fieldname": "allopathic_medicines",
    "fieldtype": "Text",
-   "label": "Panchakarma"
+   "label": "Allopathic Medicines"
   },
   {
-   "fieldname": "home_remedies",
-   "fieldtype": "Small Text",
-   "label": "Home Remedies"
+   "fieldname": "detox_procedures",
+   "fieldtype": "Text",
+   "label": "Detoxifying Procedures & Decoctions"
   },
   {
    "fieldname": "diet_sec",
    "fieldtype": "Section Break",
-   "label": "Diet & Lifestyle"
+   "label": "Diet & Lifestyle Plan"
   },
   {
    "fieldname": "diet_include",
@@ -300,6 +409,16 @@
    "fieldtype": "Column Break"
   },
   {
+   "fieldname": "exercises_yoga",
+   "fieldtype": "Small Text",
+   "label": "Exercises & Yoga"
+  },
+  {
+   "fieldname": "home_remedies",
+   "fieldtype": "Small Text",
+   "label": "Home Remedies"
+  },
+  {
    "fieldname": "lifestyle_advice",
    "fieldtype": "Small Text",
    "label": "Lifestyle Advice"
@@ -310,43 +429,29 @@
    "label": "Investigations Advised"
   },
   {
-   "fieldname": "history_sec",
+   "fieldname": "tab_summary",
+   "fieldtype": "Tab Break",
+   "label": "Prescription Summary & Follow-Up"
+  },
+  {
+   "fieldname": "rx_summary_sec",
    "fieldtype": "Section Break",
-   "label": "Patient History"
+   "label": "Executive Prescription Summary"
   },
   {
-   "fieldname": "personal_history_diet",
+   "fieldname": "rx_quick_summary",
    "fieldtype": "Small Text",
-   "label": "Diet History"
+   "label": "Executive Summary"
   },
   {
-   "fieldname": "personal_history_sleep",
-   "fieldtype": "Data",
-   "label": "Sleep (hrs/night)"
-  },
-  {
-   "fieldname": "col_break_4",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "past_medical_history",
+   "fieldname": "rx_daily_regimen",
    "fieldtype": "Small Text",
-   "label": "Past Medical History"
-  },
-  {
-   "fieldname": "family_history",
-   "fieldtype": "Small Text",
-   "label": "Family History"
-  },
-  {
-   "fieldname": "allergies",
-   "fieldtype": "Small Text",
-   "label": "Allergies"
+   "label": "Daily Regimen Instructions"
   },
   {
    "fieldname": "followup_sec",
    "fieldtype": "Section Break",
-   "label": "Follow Up & Prognosis"
+   "label": "Care Continuity & Follow Up"
   },
   {
    "fieldname": "follow_up",
@@ -354,9 +459,23 @@
    "label": "Follow Up Plan"
   },
   {
+   "fieldname": "col_break_followup",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "followup_doc",
+   "fieldtype": "Data",
+   "label": "Follow-Up Doctor & Contact"
+  },
+  {
    "fieldname": "prognosis",
    "fieldtype": "Small Text",
    "label": "Prognosis"
+  },
+  {
+   "fieldname": "tab_raw",
+   "fieldtype": "Tab Break",
+   "label": "Raw Casesheet Data"
   },
   {
    "fieldname": "notes_sec",
@@ -367,13 +486,6 @@
    "fieldname": "notes",
    "fieldtype": "Long Text",
    "label": "Notes"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "options": "SGP Encounter",
-   "no_copy": 1
   }
  ],
  "grid_page_length": 50,

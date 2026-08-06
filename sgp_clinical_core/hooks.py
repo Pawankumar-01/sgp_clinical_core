@@ -49,6 +49,11 @@ doc_events = {
         "on_update":    "sgp_clinical_core.integrations.fastapi_notifier.on_encounter_update",
         "on_submit":    "sgp_clinical_core.integrations.fastapi_notifier.on_encounter_submit",
     },
+
+    # Patient: auto-generate SGP Lead for direct walk-in registrations
+    "Patient": {
+        "before_insert": "sgp_clinical_core.integrations.patient_hooks.auto_generate_lead_for_walkin",
+    },
 }
 
 # ── Scheduled Jobs ────────────────────────────────────────────────────────────

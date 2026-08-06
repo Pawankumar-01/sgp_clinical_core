@@ -1,0 +1,123 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-08-06 12:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "supplement_name",
+  "quantity_mg",
+  "start_week",
+  "w1",
+  "w2",
+  "w3",
+  "w4",
+  "w5",
+  "w6",
+  "w7",
+  "w8",
+  "frequency",
+  "remarks_instructions"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "supplement_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Supplement Name",
+   "reqd": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "quantity_mg",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Qty"
+  },
+  {
+   "columns": 1,
+   "fieldname": "start_week",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Start Wk"
+  },
+  {
+   "columns": 1,
+   "fieldname": "w1",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "1 wk"
+  },
+  {
+   "columns": 1,
+   "fieldname": "w2",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "2 wk"
+  },
+  {
+   "columns": 1,
+   "fieldname": "w3",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "3 wk"
+  },
+  {
+   "columns": 1,
+   "fieldname": "w4",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "4 wk"
+  },
+  {
+   "fieldname": "w5",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "5 wk"
+  },
+  {
+   "fieldname": "w6",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "6 wk"
+  },
+  {
+   "fieldname": "w7",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "7 wk"
+  },
+  {
+   "fieldname": "w8",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "8 wk"
+  },
+  {
+   "columns": 1,
+   "fieldname": "frequency",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Frequency"
+  },
+  {
+   "columns": 2,
+   "fieldname": "remarks_instructions",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Remarks / Instructions"
+  }
+ ],
+ "istable": 1,
+ "modified": "2026-08-06 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "SGP Clinical Core",
+ "name": "SGP Supplement Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

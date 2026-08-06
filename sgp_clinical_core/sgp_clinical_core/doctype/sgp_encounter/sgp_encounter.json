@@ -62,6 +62,8 @@
   "review_of_systems",
   "investigation_reports",
   "tab_treatment",
+  "supplements_table_sec",
+  "sgp_supplements_table",
   "treatment_sec",
   "sgp_rx",
   "panchakarma",
@@ -390,9 +392,20 @@
    "label": "Treatment & Regimen"
   },
   {
+   "fieldname": "supplements_table_sec",
+   "fieldtype": "Section Break",
+   "label": "SGP Supplements & Regimen Table (8-Week Matrix)"
+  },
+  {
+   "fieldname": "sgp_supplements_table",
+   "fieldtype": "Table",
+   "label": "SGP Supplements & Regimen Table",
+   "options": "SGP Supplement Item"
+  },
+  {
    "fieldname": "treatment_sec",
    "fieldtype": "Section Break",
-   "label": "Prescriptions & Panchakarma"
+   "label": "Prescriptions Summary Text & Therapies"
   },
   {
    "fieldname": "sgp_rx",

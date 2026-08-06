@@ -90,6 +90,54 @@ class SGPEncounter(Document):
             if not self.consent_verified:
                 frappe.throw("Cannot proceed without consent verification.")
 
+        # ── Synchronize sgp_supplements_table and self.notes (bidirectional) ──
+        if self.notes:
+            try:
+                notes_dict = json.loads(self.notes) if isinstance(self.notes, str) else self.notes
+            except Exception:
+                notes_dict = {}
+        else:
+            notes_dict = {}
+
+        if self.get("sgp_supplements_table") and len(self.get("sgp_supplements_table")) > 0:
+            supp_list = []
+            for row in self.get("sgp_supplements_table"):
+                wks = [row.w1 or "", row.w2 or "", row.w3 or "", row.w4 or "", row.w5 or "", row.w6 or "", row.w7 or "", row.w8 or ""]
+                supp_dict = {
+                    "name": row.supplement_name or "",
+                    "quantity_mg": row.quantity_mg or "",
+                    "start_week": str(row.start_week or "1"),
+                    "weeks": wks,
+                    "frequency": row.frequency or "BID",
+                    "timing": row.remarks_instructions or "",
+                    "remarks": row.remarks_instructions or "",
+                    "needs_doctor_confirmation": []
+                }
+                supp_list.append(supp_dict)
+            notes_dict["ayurvedic_supplements"] = supp_list
+            self.notes = json.dumps(notes_dict, ensure_ascii=False)
+        elif notes_dict.get("ayurvedic_supplements"):
+            for item in notes_dict.get("ayurvedic_supplements", []):
+                if isinstance(item, dict) and item.get("name"):
+                    wks = item.get("weeks") or [""] * 8
+                    while len(wks) < 8:
+                        wks.append("")
+                    self.append("sgp_supplements_table", {
+                        "supplement_name": item.get("name"),
+                        "quantity_mg": item.get("quantity_mg") or "1000mg",
+                        "start_week": str(item.get("start_week") or "1"),
+                        "w1": str(wks[0] or ""),
+                        "w2": str(wks[1] or ""),
+                        "w3": str(wks[2] or ""),
+                        "w4": str(wks[3] or ""),
+                        "w5": str(wks[4] or ""),
+                        "w6": str(wks[5] or ""),
+                        "w7": str(wks[6] or ""),
+                        "w8": str(wks[7] or ""),
+                        "frequency": item.get("frequency") or "BID",
+                        "remarks_instructions": item.get("timing") or item.get("remarks") or ""
+                    })
+
         # ── Status transition protection & manual field synchronization ────
         if not self.is_new():
             old_doc = self.get_doc_before_save()
@@ -106,8 +154,8 @@ class SGPEncounter(Document):
                     notes_dict = json.loads(self.notes) if isinstance(self.notes, str) else self.notes
                     modified = False
 
-                    # Sync sgp_rx (Ayurvedic Supplements)
-                    if self.sgp_rx and self.sgp_rx != old_doc.sgp_rx:
+                    # Sync sgp_rx (Ayurvedic Supplements text fallback if table not used)
+                    if not self.get("sgp_supplements_table") and self.sgp_rx and self.sgp_rx != old_doc.sgp_rx:
                         existing = notes_dict.get("ayurvedic_supplements", [])
                         notes_dict["ayurvedic_supplements"] = parse_sgp_rx_text(self.sgp_rx, existing)
                         modified = True

@@ -38,3 +38,13 @@ def auto_generate_lead_for_walkin(doc, method=None):
         frappe.logger().info(f"[Walk-in Hook] Auto-generated SGP Lead {lead.name} for direct walk-in patient {lead_name}")
     except Exception as e:
         frappe.logger().error(f"[Walk-in Hook Error] Failed to auto-generate SGP Lead for walk-in patient: {str(e)}")
+
+
+def ensure_patient_lead_not_mandatory():
+    """
+    Runs automatically after bench migrate on any server deployment to ensure Patient-custom_sgp_lead is never mandatory in MariaDB.
+    """
+    if frappe.db.exists("Custom Field", "Patient-custom_sgp_lead"):
+        frappe.db.set_value("Custom Field", "Patient-custom_sgp_lead", "reqd", 0)
+        frappe.clear_cache(doctype="Patient")
+        frappe.logger().info("[after_migrate] Ensured Patient-custom_sgp_lead reqd=0")

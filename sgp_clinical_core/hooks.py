@@ -91,3 +91,7 @@ jinja = {
         "sgp_clinical_core.jinja_helpers.parse_notes_json"
     ]
 }
+
+after_migrate = [
+    "sgp_clinical_core.integrations.patient_hooks.ensure_patient_lead_not_mandatory",
+]

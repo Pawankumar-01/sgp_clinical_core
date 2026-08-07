@@ -224,29 +224,71 @@ class SGPEncounter(Document):
                         modified = True
 
                     # Sync chief_complaint
-                    if self.chief_complaint and self.chief_complaint != old_doc.chief_complaint:
+                    if self.chief_complaint != old_doc.chief_complaint:
                         if isinstance(notes_dict.get("chief_complaint"), dict):
-                            notes_dict["chief_complaint"]["summary"] = self.chief_complaint
-                        else:
-                            notes_dict["chief_complaint"] = {"summary": self.chief_complaint, "complaints": []}
+                            notes_dict["chief_complaint"]["summary"] = ""
                         modified = True
 
                     # Sync anamnesis
-                    if self.anamnesis and self.anamnesis != old_doc.anamnesis:
+                    if self.anamnesis != old_doc.anamnesis:
                         if isinstance(notes_dict.get("anamnesis"), dict):
-                            notes_dict["anamnesis"]["onset"] = None
-                            notes_dict["anamnesis"]["progression"] = None
-                            notes_dict["anamnesis"]["summary"] = self.anamnesis
-                        else:
-                            notes_dict["anamnesis"] = {"summary": self.anamnesis}
+                            notes_dict["anamnesis"]["onset"] = ""
+                            notes_dict["anamnesis"]["progression"] = ""
+                            notes_dict["anamnesis"]["summary"] = ""
                         modified = True
 
                     # Sync general_examination
-                    if self.general_examination and self.general_examination != old_doc.general_examination:
+                    if self.general_examination != old_doc.general_examination:
                         if isinstance(notes_dict.get("general_examination"), dict):
-                            notes_dict["general_examination"]["other_findings"] = [self.general_examination]
-                        else:
-                            notes_dict["general_examination"] = {"other_findings": [self.general_examination]}
+                            notes_dict["general_examination"]["other_findings"] = []
+                        modified = True
+                        
+                    # Sync systemic_examination
+                    if self.systemic_examination != old_doc.systemic_examination:
+                        notes_dict["systemic_examination"] = {}
+                        modified = True
+                        
+                    # Sync past_medical_history
+                    if self.past_medical_history != old_doc.past_medical_history:
+                        if isinstance(notes_dict.get("past_medical_history"), dict):
+                            notes_dict["past_medical_history"]["medical"] = []
+                        modified = True
+                        
+                    # Sync allopathic_medicines
+                    if self.allopathic_medicines != old_doc.allopathic_medicines:
+                        if isinstance(notes_dict.get("treatment_and_plan"), dict):
+                            notes_dict["treatment_and_plan"]["current_medications"] = []
+                        modified = True
+                        
+                    # Sync allergies
+                    if self.allergies != old_doc.allergies:
+                        if isinstance(notes_dict.get("past_medical_history"), dict):
+                            notes_dict["past_medical_history"]["allergies"] = []
+                        modified = True
+                        
+                    # Sync review_of_systems
+                    if self.review_of_systems != old_doc.review_of_systems:
+                        notes_dict["review_of_systems"] = {}
+                        modified = True
+                        
+                    # Sync ayurvedic_diagnosis and allopathic_diagnosis
+                    if self.ayurvedic_diagnosis != old_doc.ayurvedic_diagnosis:
+                        if "_final_case_sheet" in notes_dict and "erp_field_summaries" in notes_dict["_final_case_sheet"]:
+                            notes_dict["_final_case_sheet"]["erp_field_summaries"]["ayurvedic_diagnosis"] = self.ayurvedic_diagnosis
+                        modified = True
+                    if self.allopathic_diagnosis != old_doc.allopathic_diagnosis:
+                        if "_final_case_sheet" in notes_dict and "erp_field_summaries" in notes_dict["_final_case_sheet"]:
+                            notes_dict["_final_case_sheet"]["erp_field_summaries"]["allopathic_diagnosis"] = self.allopathic_diagnosis
+                        modified = True
+                        
+                    # Sync rx_quick_summary and rx_daily_regimen
+                    if self.rx_quick_summary != old_doc.rx_quick_summary:
+                        if "_final_case_sheet" in notes_dict and "erp_field_summaries" in notes_dict["_final_case_sheet"]:
+                            notes_dict["_final_case_sheet"]["erp_field_summaries"]["rx_quick_summary"] = self.rx_quick_summary
+                        modified = True
+                    if self.rx_daily_regimen != old_doc.rx_daily_regimen:
+                        if "_final_case_sheet" in notes_dict and "erp_field_summaries" in notes_dict["_final_case_sheet"]:
+                            notes_dict["_final_case_sheet"]["erp_field_summaries"]["rx_daily_regimen"] = self.rx_daily_regimen
                         modified = True
 
                     if modified:

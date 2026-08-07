@@ -1,0 +1,55 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-08-07 12:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "system",
+  "vata",
+  "pitta",
+  "kapha"
+ ],
+ "fields": [
+  {
+   "columns": 3,
+   "fieldname": "system",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "System / Organ",
+   "reqd": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "vata",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Vaatham"
+  },
+  {
+   "columns": 2,
+   "fieldname": "pitta",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Pitham"
+  },
+  {
+   "columns": 2,
+   "fieldname": "kapha",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Kapham"
+  }
+ ],
+ "istable": 1,
+ "modified": "2026-08-07 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "SGP Clinical Core",
+ "name": "SGP Pulse Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

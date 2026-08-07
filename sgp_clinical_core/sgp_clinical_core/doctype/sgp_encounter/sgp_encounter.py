@@ -149,6 +149,31 @@ class SGPEncounter(Document):
                         "remarks_instructions": item.get("timing") or item.get("remarks") or ""
                     })
 
+        # ── Synchronize sgp_pulse_table and self.notes (bidirectional) ──
+        if self.get("sgp_pulse_table") and len(self.get("sgp_pulse_table")) > 0:
+            if "pulse_diagnosis" not in notes_dict or not isinstance(notes_dict["pulse_diagnosis"], dict):
+                notes_dict["pulse_diagnosis"] = {"systems": [], "overall_vpk": {}}
+            pulse_list = []
+            for row in self.get("sgp_pulse_table"):
+                pulse_list.append({
+                    "system": row.system or "",
+                    "vata": row.vata or "",
+                    "pitta": row.pitta or "",
+                    "kapha": row.kapha or ""
+                })
+            notes_dict["pulse_diagnosis"]["systems"] = pulse_list
+            self.notes = json.dumps(notes_dict, ensure_ascii=False)
+        elif notes_dict.get("pulse_diagnosis") and isinstance(notes_dict["pulse_diagnosis"], dict):
+            sys_list = notes_dict["pulse_diagnosis"].get("systems", [])
+            for item in sys_list:
+                if isinstance(item, dict) and item.get("system"):
+                    self.append("sgp_pulse_table", {
+                        "system": item.get("system"),
+                        "vata": item.get("vata") or "",
+                        "pitta": item.get("pitta") or "",
+                        "kapha": item.get("kapha") or ""
+                    })
+
         # ── Status transition protection & manual field synchronization ────
         if not self.is_new():
             old_doc = self.get_doc_before_save()

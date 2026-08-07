@@ -56,6 +56,7 @@
   "clinical_sec",
   "vpk_dominance",
   "pulse_diagnosis",
+  "sgp_pulse_table",
   "col_break_1",
   "ayurvedic_diagnosis",
   "allopathic_diagnosis",
@@ -361,6 +362,12 @@
    "fieldname": "pulse_diagnosis",
    "fieldtype": "Small Text",
    "label": "Pulse Diagnosis"
+  },
+  {
+   "fieldname": "sgp_pulse_table",
+   "fieldtype": "Table",
+   "label": "Pulse Diagnosis Grid",
+   "options": "SGP Pulse Item"
   },
   {
    "fieldname": "col_break_1",

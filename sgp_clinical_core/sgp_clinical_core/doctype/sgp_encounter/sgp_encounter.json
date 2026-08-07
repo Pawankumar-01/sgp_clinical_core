@@ -15,6 +15,7 @@
   "appointment",
   "lead",
   "encounter_date",
+  "review_after",
   "doctor",
   "case_type",
   "status",
@@ -84,6 +85,9 @@
   "rx_summary_sec",
   "rx_quick_summary",
   "rx_daily_regimen",
+  "col_break_regimen",
+  "oil_applications",
+  "breathing_exercises",
   "followup_sec",
   "follow_up",
   "col_break_followup",
@@ -152,6 +156,12 @@
    "label": "Encounter Date",
    "reqd": 1,
    "in_list_view": 1
+  },
+  {
+   "fieldname": "review_after",
+   "fieldtype": "Data",
+   "label": "Review After",
+   "description": "Shown on the print format header row. Manual value here always takes priority over any AI-suggested review_after value."
   },
   {
    "fieldname": "status",
@@ -459,7 +469,7 @@
    "fieldtype": "Table",
    "label": "Diet Schedule by Week / Phase",
    "options": "SGP Diet Week Item",
-   "description": "Add weekly diet phases. The print format will display these under 'Review After' and the Diet section."
+   "description": "Add weekly diet phases. Rendered directly from this table in the 'Dietary and Lifestyle Plan' section of the print format (does not go through the Notes/AI JSON)."
   },
   {
    "fieldname": "col_break_3",
@@ -503,7 +513,22 @@
   {
    "fieldname": "rx_daily_regimen",
    "fieldtype": "Small Text",
-   "label": "Daily Regimen Instructions"
+   "label": "Daily Regimen Instructions",
+   "description": "Free-text override. If filled, this whole block prints as-is instead of the two granular fields below."
+  },
+  {
+   "fieldname": "col_break_regimen",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "oil_applications",
+   "fieldtype": "Small Text",
+   "label": "Oil Applications"
+  },
+  {
+   "fieldname": "breathing_exercises",
+   "fieldtype": "Small Text",
+   "label": "Breathing Exercises"
   },
   {
    "fieldname": "followup_sec",

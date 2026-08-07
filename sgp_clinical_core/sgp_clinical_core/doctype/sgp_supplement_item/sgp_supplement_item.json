@@ -30,17 +30,15 @@
    "reqd": 1
   },
   {
-   "columns": 1,
    "fieldname": "quantity_mg",
    "fieldtype": "Data",
-   "in_list_view": 1,
+   "in_list_view": 0,
    "label": "Qty"
   },
   {
-   "columns": 1,
    "fieldname": "start_week",
    "fieldtype": "Data",
-   "in_list_view": 1,
+   "in_list_view": 0,
    "label": "Start Wk"
   },
   {
@@ -72,42 +70,45 @@
    "label": "4 wk"
   },
   {
+   "columns": 1,
    "fieldname": "w5",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "5 wk"
   },
   {
+   "columns": 1,
    "fieldname": "w6",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "6 wk"
   },
   {
+   "columns": 1,
    "fieldname": "w7",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "7 wk"
   },
   {
+   "columns": 1,
    "fieldname": "w8",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "8 wk"
   },
   {
-   "columns": 1,
    "fieldname": "frequency",
    "fieldtype": "Data",
-   "in_list_view": 1,
+   "in_list_view": 0,
    "label": "Frequency"
   },
   {
-   "columns": 2,
+   "columns": 1,
    "fieldname": "remarks_instructions",
    "fieldtype": "Small Text",
    "in_list_view": 1,
-   "label": "Remarks / Instructions"
+   "label": "Remarks"
   }
  ],
  "istable": 1,

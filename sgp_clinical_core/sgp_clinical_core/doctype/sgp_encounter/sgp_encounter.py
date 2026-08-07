@@ -103,6 +103,17 @@ class SGPEncounter(Document):
             supp_list = []
             for row in self.get("sgp_supplements_table"):
                 wks = [row.w1 or "", row.w2 or "", row.w3 or "", row.w4 or "", row.w5 or "", row.w6 or "", row.w7 or "", row.w8 or ""]
+                
+                # Auto-fill missing remaining weeks based on the last non-empty entry
+                last_val = ""
+                for i in range(8):
+                    if wks[i].strip():
+                        last_val = wks[i].strip()
+                    else:
+                        wks[i] = last_val
+                        
+                # Update the row object so UI immediately shows the carried-forward values upon save
+                row.w1, row.w2, row.w3, row.w4, row.w5, row.w6, row.w7, row.w8 = wks
                 supp_dict = {
                     "name": row.supplement_name or "",
                     "quantity_mg": row.quantity_mg or "",

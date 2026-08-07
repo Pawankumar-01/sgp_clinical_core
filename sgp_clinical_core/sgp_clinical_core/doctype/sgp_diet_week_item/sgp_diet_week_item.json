@@ -1,0 +1,58 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-08-07 08:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "week_range",
+  "diet_type",
+  "diet_items",
+  "notes"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "week_range",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Week Range",
+   "reqd": 1,
+   "description": "e.g. Week 1-2 or Week 3-8"
+  },
+  {
+   "columns": 2,
+   "fieldname": "diet_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Diet Type",
+   "options": "Rice Diet\nBarley Diet\nDetox Diet\nNormal Vegetarian\nSattvic Diet\nCustom",
+   "reqd": 1
+  },
+  {
+   "columns": 4,
+   "fieldname": "diet_items",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Diet Items / Instructions",
+   "description": "List specific foods or instructions for this phase"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "in_list_view": 0,
+   "label": "Additional Notes"
+  }
+ ],
+ "istable": 1,
+ "modified": "2026-08-07 08:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "SGP Clinical Core",
+ "name": "SGP Diet Week Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

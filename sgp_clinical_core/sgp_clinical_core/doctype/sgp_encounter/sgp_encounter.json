@@ -74,6 +74,7 @@
   "diet_sec",
   "diet_include",
   "diet_exclude",
+  "sgp_diet_weeks",
   "col_break_3",
   "exercises_yoga",
   "home_remedies",
@@ -452,6 +453,13 @@
    "fieldname": "diet_exclude",
    "fieldtype": "Small Text",
    "label": "Diet — Exclude"
+  },
+  {
+   "fieldname": "sgp_diet_weeks",
+   "fieldtype": "Table",
+   "label": "Diet Schedule by Week / Phase",
+   "options": "SGP Diet Week Item",
+   "description": "Add weekly diet phases. The print format will display these under 'Review After' and the Diet section."
   },
   {
    "fieldname": "col_break_3",

@@ -27,7 +27,7 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Diet Type",
-   "options": "Rice Diet\nBarley Diet\nDetox Diet\nNormal Vegetarian\nSattvic Diet\nCustom",
+   "options": "VPD\nVAD\nPPD\nPAD\nKPD\nKAD",
    "reqd": 1
   },
   {

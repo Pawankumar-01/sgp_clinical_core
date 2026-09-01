@@ -9,6 +9,10 @@
   "lead_information_section",
   "lead_name",
   "mobile_number",
+  "dob",
+  "uid_type",
+  "uid_number",
+  "relation",
   "email",
   "lead_source",
   "interested_in",
@@ -47,6 +51,31 @@
    "in_list_view": 1,
    "label": "Mobile Number",
    "reqd": 1
+  },
+  {
+   "fieldname": "dob",
+   "fieldtype": "Date",
+   "label": "Date of Birth"
+  },
+  {
+   "default": "Not Provided",
+   "fieldname": "uid_type",
+   "fieldtype": "Select",
+   "label": "UID Type",
+   "options": "Not Provided\nAadhaar\nPAN\nPassport\nDriving Licence\nOther"
+  },
+  {
+   "description": "Aadhaar / PAN / Passport number — used as clinical identity key for deduplication",
+   "fieldname": "uid_number",
+   "fieldtype": "Data",
+   "label": "UID Number"
+  },
+  {
+   "default": "Self",
+   "fieldname": "relation",
+   "fieldtype": "Select",
+   "label": "Relation to Primary",
+   "options": "Self\nSpouse\nSon\nDaughter\nFather\nMother\nOther"
   },
   {
    "fieldname": "email",

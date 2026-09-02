@@ -1,216 +1,187 @@
 {
- "actions": [],
- "allow_rename": 1,
- "autoname": "SGP-LEAD-.YYYY.-.####",
- "creation": "2026-03-03 10:16:34.421628",
- "doctype": "DocType",
- "engine": "InnoDB",
- "field_order": [
-  "lead_information_section",
-  "lead_name",
-  "mobile_number",
-  "dob",
-  "uid_type",
-  "uid_number",
-  "relation",
-  "email",
-  "lead_source",
-  "interested_in",
-  "crm_status_section",
-  "status",
-  "orientation_details_section",
-  "orientation_session",
-  "orientation_completed",
-  "appointment_section",
-  "appointment",
-  "device_tracking_section",
-  "device_interested",
-  "device_followup_count",
-  "device_sale_completed",
-  "device_payment_mode",
-  "internal_notes_section",
-  "assigned_patient_manager",
-  "notes"
- ],
- "fields": [
-  {
-   "fieldname": "lead_information_section",
-   "fieldtype": "Section Break",
-   "label": "Lead Information"
-  },
-  {
-   "fieldname": "lead_name",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Lead Name",
-   "reqd": 1
-  },
-  {
-   "fieldname": "mobile_number",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Mobile Number",
-   "reqd": 1
-  },
-  {
-   "fieldname": "dob",
-   "fieldtype": "Date",
-   "label": "Date of Birth"
-  },
-  {
-   "default": "Not Provided",
-   "fieldname": "uid_type",
-   "fieldtype": "Select",
-   "label": "UID Type",
-   "options": "Not Provided\nAadhaar\nPAN\nPassport\nDriving Licence\nOther"
-  },
-  {
-   "description": "Aadhaar / PAN / Passport number — used as clinical identity key for deduplication",
-   "fieldname": "uid_number",
-   "fieldtype": "Data",
-   "label": "UID Number"
-  },
-  {
-   "default": "Self",
-   "fieldname": "relation",
-   "fieldtype": "Select",
-   "label": "Relation to Primary",
-   "options": "Self\nSpouse\nSon\nDaughter\nFather\nMother\nOther"
-  },
-  {
-   "fieldname": "email",
-   "fieldtype": "Data",
-   "label": "Email"
-  },
-  {
-   "fieldname": "lead_source",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Lead Source",
-   "options": "WEBSITE\nINSTAGRAM\nFACEBOOK\nYOUTUBE\nWALK_IN\nREFERRAL\nCALL_CENTER\nWHATSAPP\nOTHER",
-   "reqd": 1
-  },
-  {
-   "fieldname": "crm_status_section",
-   "fieldtype": "Section Break",
-   "label": "CRM Status"
-  },
-  {
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "NEW\nORIENTATION_SCHEDULED\nORIENTATION_ATTENDED\nAPPOINTMENT_SCHEDULED\nCONVERTED\nREORIENTATION_REQUIRED\nDORMANT"
-  },
-  {
-   "fieldname": "orientation_details_section",
-   "fieldtype": "Section Break",
-   "label": "Orientation Details"
-  },
-  {
-   "fieldname": "orientation_session",
-   "fieldtype": "Link",
-   "label": "Orientation Session",
-   "options": "SGP Orientation Session"
-  },
-  {
-   "default": "0",
-   "fieldname": "orientation_completed",
-   "fieldtype": "Check",
-   "label": "Orientation Completed",
-   "read_only": 1
-  },
-  {
-   "fieldname": "appointment_section",
-   "fieldtype": "Section Break",
-   "label": "Appointment"
-  },
-  {
-   "fieldname": "appointment",
-   "fieldtype": "Link",
-   "label": "Appointment",
-   "options": "Patient Appointment",
-   "read_only": 1
-  },
-  {
-   "fieldname": "device_tracking_section",
-   "fieldtype": "Section Break",
-   "label": "Device Tracking"
-  },
-  {
-   "default": "0",
-   "fieldname": "device_followup_count",
-   "fieldtype": "Int",
-   "label": "Device Follow-up Count"
-  },
-  {
-   "default": "0",
-   "fieldname": "device_sale_completed",
-   "fieldtype": "Check",
-   "label": "Device Sale Completed"
-  },
-  {
-   "fieldname": "device_payment_mode",
-   "fieldtype": "Select",
-   "label": "Device Payment Mode",
-   "options": "UPI\nCash\nCard\nNet Banking\nEMI\nOther"
-  },
-  {
-   "fieldname": "internal_notes_section",
-   "fieldtype": "Section Break",
-   "label": "Internal Notes"
-  },
-  {
-   "fieldname": "assigned_patient_manager",
-   "fieldtype": "Link",
-   "label": "Assigned Patient manager",
-   "options": "User"
-  },
-  {
-   "fieldname": "notes",
-   "fieldtype": "Small Text",
-   "label": "Notes"
-  },
-  {
-   "default": "0",
-   "fieldname": "device_interested",
-   "fieldtype": "Check",
-   "label": "Device Interested"
-  },
-  {
-   "fieldname": "interested_in",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Interested In",
-   "options": "CONSULTATION\nDEVICE\nBOTH",
-   "reqd": 1
-  }
- ],
- "grid_page_length": 50,
- "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2026-03-13 12:54:11.481704",
- "modified_by": "Administrator",
- "module": "SGP Clinical Core",
- "name": "SGP Lead",
- "naming_rule": "By \"Naming Series\" field",
- "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  }
- ],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
- "sort_field": "modified",
- "sort_order": "DESC",
- "states": []
+    "actions": [],
+    "allow_rename": 1,
+    "autoname": "SGP-LEAD-.YYYY.-.####",
+    "creation": "2026-03-03 10:16:34.421628",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "lead_information_section",
+        "lead_name",
+        "mobile_number",
+        "email",
+        "lead_source",
+        "interested_in",
+        "crm_status_section",
+        "status",
+        "orientation_details_section",
+        "orientation_session",
+        "orientation_completed",
+        "appointment_section",
+        "appointment",
+        "device_tracking_section",
+        "device_interested",
+        "device_followup_count",
+        "device_sale_completed",
+        "device_payment_mode",
+        "internal_notes_section",
+        "assigned_patient_manager",
+        "notes"
+    ],
+    "fields": [
+        {
+            "fieldname": "lead_information_section",
+            "fieldtype": "Section Break",
+            "label": "Lead Information"
+        },
+        {
+            "fieldname": "lead_name",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Lead Name",
+            "reqd": 1
+        },
+        {
+            "fieldname": "mobile_number",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Mobile Number",
+            "reqd": 1
+        },
+        {
+            "fieldname": "email",
+            "fieldtype": "Data",
+            "label": "Email"
+        },
+        {
+            "fieldname": "lead_source",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "label": "Lead Source",
+            "options": "WEBSITE\nINSTAGRAM\nFACEBOOK\nYOUTUBE\nWALK_IN\nREFERRAL\nCALL_CENTER\nWHATSAPP\nOTHER",
+            "reqd": 1
+        },
+        {
+            "fieldname": "crm_status_section",
+            "fieldtype": "Section Break",
+            "label": "CRM Status"
+        },
+        {
+            "fieldname": "status",
+            "fieldtype": "Select",
+            "label": "Status",
+            "options": "NEW\nORIENTATION_SCHEDULED\nORIENTATION_ATTENDED\nAPPOINTMENT_SCHEDULED\nCONVERTED\nREORIENTATION_REQUIRED\nDORMANT"
+        },
+        {
+            "fieldname": "orientation_details_section",
+            "fieldtype": "Section Break",
+            "label": "Orientation Details"
+        },
+        {
+            "fieldname": "orientation_session",
+            "fieldtype": "Link",
+            "label": "Orientation Session",
+            "options": "SGP Orientation Session"
+        },
+        {
+            "default": "0",
+            "fieldname": "orientation_completed",
+            "fieldtype": "Check",
+            "label": "Orientation Completed",
+            "read_only": 1
+        },
+        {
+            "fieldname": "appointment_section",
+            "fieldtype": "Section Break",
+            "label": "Appointment"
+        },
+        {
+            "fieldname": "appointment",
+            "fieldtype": "Link",
+            "label": "Appointment",
+            "options": "Patient Appointment",
+            "read_only": 1
+        },
+        {
+            "fieldname": "device_tracking_section",
+            "fieldtype": "Section Break",
+            "label": "Device Tracking"
+        },
+        {
+            "default": "0",
+            "fieldname": "device_followup_count",
+            "fieldtype": "Int",
+            "label": "Device Follow-up Count"
+        },
+        {
+            "default": "0",
+            "fieldname": "device_sale_completed",
+            "fieldtype": "Check",
+            "label": "Device Sale Completed"
+        },
+        {
+            "fieldname": "device_payment_mode",
+            "fieldtype": "Select",
+            "label": "Device Payment Mode",
+            "options": "UPI\nCash\nCard\nNet Banking\nEMI\nOther"
+        },
+        {
+            "fieldname": "internal_notes_section",
+            "fieldtype": "Section Break",
+            "label": "Internal Notes"
+        },
+        {
+            "fieldname": "assigned_patient_manager",
+            "fieldtype": "Link",
+            "label": "Assigned Patient manager",
+            "options": "User"
+        },
+        {
+            "fieldname": "notes",
+            "fieldtype": "Small Text",
+            "label": "Notes"
+        },
+        {
+            "default": "0",
+            "fieldname": "device_interested",
+            "fieldtype": "Check",
+            "label": "Device Interested"
+        },
+        {
+            "fieldname": "interested_in",
+            "fieldtype": "Select",
+            "in_list_view": 1,
+            "label": "Interested In",
+            "options": "CONSULTATION\nDEVICE\nBOTH",
+            "reqd": 1
+        }
+    ],
+    "grid_page_length": 50,
+    "index_web_pages_for_search": 1,
+    "links": [],
+    "modified": "2026-03-13 12:54:11.481704",
+    "modified_by": "Administrator",
+    "module": "SGP Clinical Core",
+    "name": "SGP Lead",
+    "naming_rule": "By \"Naming Series\" field",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "System Manager",
+            "share": 1,
+            "write": 1
+        }
+    ],
+    "row_format": "Dynamic",
+    "rows_threshold_for_grid_search": 20,
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": []
 }

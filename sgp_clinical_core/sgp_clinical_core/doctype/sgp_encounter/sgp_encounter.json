@@ -1,616 +1,603 @@
 {
- "actions": [],
- "autoname": "naming_series:",
- "creation": "2026-02-13 14:03:11.779003",
- "doctype": "DocType",
- "editable_grid": 1,
- "engine": "InnoDB",
- "field_order": [
-  "tab_patient_history",
-  "patient_history_html",
-  "tab_history",
-  "patient",
-  "patient_name",
-  "age",
-  "gender",
-  "mobile",
-  "appointment",
-  "lead",
-  "encounter_date",
-  "review_after",
-  "doctor",
-  "case_type",
-  "status",
-  "consent_verified",
-  "naming_series",
-  "custom_payment_entry",
-  "custom_paid_amount",
-  "amended_from",
-  "chief_complaint_sec",
-  "chief_complaint",
-  "anamnesis",
-  "history_sec",
-  "past_medical_history",
-  "medication_history",
-  "col_break_4",
-  "surgical_history",
-  "menstrual_obstetric_history",
-  "family_history",
-  "allergies",
-  "personal_history_diet",
-  "personal_history_sleep",
-  "tab_exam",
-  "vitals_sec",
-  "height_cm",
-  "weight_kg",
-  "bp",
-  "temp",
-  "pr",
-  "rr",
-  "col_break_vitals",
-  "wrist_cm",
-  "waist_cm",
-  "fore_arm_cm",
-  "hip_cm",
-  "exam_sec",
-  "general_examination",
-  "col_break_exam",
-  "systemic_examination",
-  "clinical_sec",
-  "vpk_dominance",
-  "pulse_diagnosis",
-  "sgp_pulse_table",
-  "col_break_1",
-  "ayurvedic_diagnosis",
-  "allopathic_diagnosis",
-  "review_of_systems",
-  "investigation_reports",
-  "tab_treatment",
-  "supplements_table_sec",
-  "sgp_supplements_table",
-  "treatment_sec",
-  "sgp_rx",
-  "panchakarma",
-  "col_break_2",
-  "allopathic_medicines",
-  "detox_procedures",
-  "diet_sec",
-  "diet_include",
-  "diet_exclude",
-  "sgp_diet_weeks",
-  "col_break_3",
-  "exercises_yoga",
-  "home_remedies",
-  "lifestyle_advice",
-  "investigations_advised",
-  "tab_summary",
-  "rx_summary_sec",
-  "rx_quick_summary",
-  "rx_daily_regimen",
-  "col_break_regimen",
-  "oil_applications",
-  "breathing_exercises",
-  "followup_sec",
-  "follow_up",
-  "col_break_followup",
-  "followup_doc",
-  "prognosis",
-  "tab_raw",
-  "notes_sec",
-  "notes"
- ],
- "fields": [
-  {
-   "fieldname": "tab_patient_history",
-   "fieldtype": "Tab Break",
-   "label": "\ud83d\udccb Patient History"
-  },
-  {
-   "fieldname": "patient_history_html",
-   "fieldtype": "HTML",
-   "label": "Previous Encounter Timeline",
-   "options": "<div class=\"text-muted text-center p-3\">Select a patient to load their clinical history.</div>"
-  },
-  {
-   "fieldname": "tab_history",
-   "fieldtype": "Tab Break",
-   "label": "Context & History"
-  },
-  {
-   "fieldname": "naming_series",
-   "fieldtype": "Select",
-   "label": "Naming Series",
-   "options": "SGP-ENC-.YYYY.-.#####",
-   "reqd": 1
-  },
-  {
-   "fieldname": "patient",
-   "fieldtype": "Link",
-   "label": "Patient",
-   "options": "Patient",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fetch_from": "patient.patient_name",
-   "fieldname": "patient_name",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Patient Name"
-  },
-  {
-   "fieldname": "age",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Age"
-  },
-  {
-   "fetch_from": "patient.sex",
-   "fieldname": "gender",
-   "fieldtype": "Data",
-   "label": "Gender"
-  },
-  {
-   "fetch_from": "patient.mobile",
-   "fieldname": "mobile",
-   "fieldtype": "Data",
-   "label": "Mobile"
-  },
-  {
-   "fieldname": "doctor",
-   "fieldtype": "Link",
-   "label": "Practitioner",
-   "options": "Healthcare Practitioner",
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "encounter_date",
-   "fieldtype": "Datetime",
-   "label": "Encounter Date",
-   "reqd": 1,
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "review_after",
-   "fieldtype": "Data",
-   "label": "Review After",
-   "description": "Shown on the print format header row. Manual value here always takes priority over any AI-suggested review_after value."
-  },
-  {
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "Draft\nUnder Review\nApproved\nClosed",
-   "default": "Draft",
-   "in_list_view": 1
-  },
-  {
-   "fieldname": "case_type",
-   "fieldtype": "Select",
-   "label": "Case Type",
-   "options": "\nAyurvedic\nAllopathic\nIntegrated"
-  },
-  {
-   "fieldname": "lead",
-   "fieldtype": "Link",
-   "label": "SGP Lead",
-   "options": "SGP Lead"
-  },
-  {
-   "fieldname": "appointment",
-   "fieldtype": "Link",
-   "label": "Appointment",
-   "options": "Patient Appointment"
-  },
-  {
-   "fieldname": "consent_verified",
-   "fieldtype": "Check",
-   "label": "Consent Verified"
-  },
-  {
-   "fieldname": "custom_payment_entry",
-   "fieldtype": "Link",
-   "label": "Payment Entry",
-   "options": "Payment Entry"
-  },
-  {
-   "fieldname": "custom_paid_amount",
-   "fieldtype": "Currency",
-   "label": "Paid Amount"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "SGP Encounter"
-  },
-  {
-   "fieldname": "chief_complaint_sec",
-   "fieldtype": "Section Break",
-   "label": "Chief Complaint"
-  },
-  {
-   "fieldname": "chief_complaint",
-   "fieldtype": "Small Text",
-   "label": "Chief Complaint"
-  },
-  {
-   "fieldname": "anamnesis",
-   "fieldtype": "Text",
-   "label": "Anamnesis"
-  },
-  {
-   "fieldname": "history_sec",
-   "fieldtype": "Section Break",
-   "label": "Comprehensive Patient History"
-  },
-  {
-   "fieldname": "past_medical_history",
-   "fieldtype": "Small Text",
-   "label": "Past Medical History"
-  },
-  {
-   "fieldname": "medication_history",
-   "fieldtype": "Small Text",
-   "label": "Medication & Treatment History"
-  },
-  {
-   "fieldname": "col_break_4",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "surgical_history",
-   "fieldtype": "Small Text",
-   "label": "Surgical & Hospitalization History"
-  },
-  {
-   "fieldname": "menstrual_obstetric_history",
-   "fieldtype": "Small Text",
-   "label": "Menstrual / Obstetric History"
-  },
-  {
-   "fieldname": "family_history",
-   "fieldtype": "Small Text",
-   "label": "Family History"
-  },
-  {
-   "fieldname": "allergies",
-   "fieldtype": "Small Text",
-   "label": "Allergies"
-  },
-  {
-   "fieldname": "personal_history_diet",
-   "fieldtype": "Small Text",
-   "label": "Diet History"
-  },
-  {
-   "fieldname": "personal_history_sleep",
-   "fieldtype": "Data",
-   "label": "Sleep (hrs/night)"
-  },
-  {
-   "fieldname": "tab_exam",
-   "fieldtype": "Tab Break",
-   "label": "Examination & Nadi Pariksha"
-  },
-  {
-   "fieldname": "vitals_sec",
-   "fieldtype": "Section Break",
-   "label": "Vitals & Anthropometry"
-  },
-  {
-   "fieldname": "height_cm",
-   "fieldtype": "Float",
-   "label": "Height (cm)"
-  },
-  {
-   "fieldname": "weight_kg",
-   "fieldtype": "Float",
-   "label": "Weight (kg)"
-  },
-  {
-   "fieldname": "bp",
-   "fieldtype": "Data",
-   "label": "Blood Pressure (BP)"
-  },
-  {
-   "fieldname": "temp",
-   "fieldtype": "Data",
-   "label": "Temperature"
-  },
-  {
-   "fieldname": "pr",
-   "fieldtype": "Data",
-   "label": "Pulse Rate (PR)"
-  },
-  {
-   "fieldname": "rr",
-   "fieldtype": "Data",
-   "label": "Respiratory Rate (RR)"
-  },
-  {
-   "fieldname": "col_break_vitals",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "wrist_cm",
-   "fieldtype": "Float",
-   "label": "Wrist (cm)"
-  },
-  {
-   "fieldname": "waist_cm",
-   "fieldtype": "Float",
-   "label": "Waist (cm)"
-  },
-  {
-   "fieldname": "fore_arm_cm",
-   "fieldtype": "Float",
-   "label": "Forearm (cm)"
-  },
-  {
-   "fieldname": "hip_cm",
-   "fieldtype": "Float",
-   "label": "Hip (cm)"
-  },
-  {
-   "fieldname": "exam_sec",
-   "fieldtype": "Section Break",
-   "label": "Physical Examination"
-  },
-  {
-   "fieldname": "general_examination",
-   "fieldtype": "Small Text",
-   "label": "General Examination"
-  },
-  {
-   "fieldname": "col_break_exam",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "systemic_examination",
-   "fieldtype": "Small Text",
-   "label": "Systemic Examination"
-  },
-  {
-   "fieldname": "clinical_sec",
-   "fieldtype": "Section Break",
-   "label": "Diagnostic Assessment & Nadi Pariksha"
-  },
-  {
-   "fieldname": "vpk_dominance",
-   "fieldtype": "Data",
-   "label": "VPK Dominance"
-  },
-  {
-   "fieldname": "pulse_diagnosis",
-   "fieldtype": "Small Text",
-   "label": "Pulse Diagnosis"
-  },
-  {
-   "fieldname": "sgp_pulse_table",
-   "fieldtype": "Table",
-   "label": "Pulse Diagnosis Grid",
-   "options": "SGP Pulse Item"
-  },
-  {
-   "fieldname": "col_break_1",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "ayurvedic_diagnosis",
-   "fieldtype": "Small Text",
-   "label": "Ayurvedic Diagnosis"
-  },
-  {
-   "fieldname": "allopathic_diagnosis",
-   "fieldtype": "Small Text",
-   "label": "Allopathic Diagnosis"
-  },
-  {
-   "fieldname": "review_of_systems",
-   "fieldtype": "Small Text",
-   "label": "Review of Systems"
-  },
-  {
-   "fieldname": "investigation_reports",
-   "fieldtype": "Small Text",
-   "label": "Investigation Reports (Brought)"
-  },
-  {
-   "fieldname": "tab_treatment",
-   "fieldtype": "Tab Break",
-   "label": "Treatment & Regimen"
-  },
-  {
-   "fieldname": "supplements_table_sec",
-   "fieldtype": "Section Break",
-   "label": "SGP Supplements & Regimen Table (8-Week Matrix)"
-  },
-  {
-   "fieldname": "sgp_supplements_table",
-   "fieldtype": "Table",
-   "label": "SGP Supplements & Regimen Table",
-   "options": "SGP Supplement Item"
-  },
-  {
-   "fieldname": "treatment_sec",
-   "fieldtype": "Section Break",
-   "label": "Prescriptions Summary Text & Therapies"
-  },
-  {
-   "fieldname": "sgp_rx",
-   "fieldtype": "Text",
-   "label": "SGP Supplements (Rx)"
-  },
-  {
-   "fieldname": "panchakarma",
-   "fieldtype": "Text",
-   "label": "Panchakarma"
-  },
-  {
-   "fieldname": "col_break_2",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "allopathic_medicines",
-   "fieldtype": "Text",
-   "label": "Allopathic Medicines"
-  },
-  {
-   "fieldname": "detox_procedures",
-   "fieldtype": "Text",
-   "label": "Detoxifying Procedures & Decoctions"
-  },
-  {
-   "fieldname": "diet_sec",
-   "fieldtype": "Section Break",
-   "label": "Diet & Lifestyle Plan"
-  },
-  {
-   "fieldname": "diet_include",
-   "fieldtype": "Small Text",
-   "label": "Diet — Include"
-  },
-  {
-   "fieldname": "diet_exclude",
-   "fieldtype": "Small Text",
-   "label": "Diet — Exclude"
-  },
-  {
-   "fieldname": "sgp_diet_weeks",
-   "fieldtype": "Table",
-   "label": "Diet Schedule by Week / Phase",
-   "options": "SGP Diet Week Item",
-   "description": "Add weekly diet phases. Rendered directly from this table in the 'Dietary and Lifestyle Plan' section of the print format (does not go through the Notes/AI JSON)."
-  },
-  {
-   "fieldname": "col_break_3",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "exercises_yoga",
-   "fieldtype": "Small Text",
-   "label": "Exercises & Yoga"
-  },
-  {
-   "fieldname": "home_remedies",
-   "fieldtype": "Small Text",
-   "label": "Home Remedies"
-  },
-  {
-   "fieldname": "lifestyle_advice",
-   "fieldtype": "Small Text",
-   "label": "Lifestyle Advice"
-  },
-  {
-   "fieldname": "investigations_advised",
-   "fieldtype": "Small Text",
-   "label": "Investigations Advised"
-  },
-  {
-   "fieldname": "tab_summary",
-   "fieldtype": "Tab Break",
-   "label": "Prescription Summary & Follow-Up"
-  },
-  {
-   "fieldname": "rx_summary_sec",
-   "fieldtype": "Section Break",
-   "label": "Executive Prescription Summary"
-  },
-  {
-   "fieldname": "rx_quick_summary",
-   "fieldtype": "Small Text",
-   "label": "Executive Summary"
-  },
-  {
-   "fieldname": "rx_daily_regimen",
-   "fieldtype": "Small Text",
-   "label": "Daily Regimen Instructions",
-   "description": "Free-text override. If filled, this whole block prints as-is instead of the two granular fields below."
-  },
-  {
-   "fieldname": "col_break_regimen",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "oil_applications",
-   "fieldtype": "Small Text",
-   "label": "Oil Applications"
-  },
-  {
-   "fieldname": "breathing_exercises",
-   "fieldtype": "Small Text",
-   "label": "Breathing Exercises"
-  },
-  {
-   "fieldname": "followup_sec",
-   "fieldtype": "Section Break",
-   "label": "Care Continuity & Follow Up"
-  },
-  {
-   "fieldname": "follow_up",
-   "fieldtype": "Small Text",
-   "label": "Follow Up Plan"
-  },
-  {
-   "fieldname": "col_break_followup",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "followup_doc",
-   "fieldtype": "Data",
-   "label": "Follow-Up Doctor & Contact"
-  },
-  {
-   "fieldname": "prognosis",
-   "fieldtype": "Small Text",
-   "label": "Prognosis"
-  },
-  {
-   "fieldname": "tab_raw",
-   "fieldtype": "Tab Break",
-   "label": "Raw Casesheet Data"
-  },
-  {
-   "fieldname": "notes_sec",
-   "fieldtype": "Section Break",
-   "label": "Raw Casesheet JSON"
-  },
-  {
-   "fieldname": "notes",
-   "fieldtype": "Long Text",
-   "label": "Notes"
-  }
- ],
- "grid_page_length": 50,
- "index_web_pages_for_search": 1,
- "is_submittable": 1,
- "links": [],
- "modified": "2026-04-29 12:58:00.703136",
- "modified_by": "Administrator",
- "module": "SGP Clinical Core",
- "name": "SGP Encounter",
- "naming_rule": "By \"Naming Series\" field",
- "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Administrator",
-   "share": 1,
-   "submit": 1,
-   "write": 1
-  }
- ],
- "row_format": "Dynamic",
- "rows_threshold_for_grid_search": 20,
- "sort_field": "modified",
- "sort_order": "DESC",
- "states": []
+    "actions": [],
+    "autoname": "naming_series:",
+    "creation": "2026-02-13 14:03:11.779003",
+    "doctype": "DocType",
+    "editable_grid": 1,
+    "engine": "InnoDB",
+    "field_order": [
+        "tab_history",
+        "patient",
+        "patient_name",
+        "age",
+        "gender",
+        "mobile",
+        "appointment",
+        "lead",
+        "encounter_date",
+        "review_after",
+        "doctor",
+        "case_type",
+        "status",
+        "consent_verified",
+        "naming_series",
+        "custom_payment_entry",
+        "custom_paid_amount",
+        "amended_from",
+        "chief_complaint_sec",
+        "chief_complaint",
+        "anamnesis",
+        "history_sec",
+        "past_medical_history",
+        "medication_history",
+        "col_break_4",
+        "surgical_history",
+        "menstrual_obstetric_history",
+        "family_history",
+        "allergies",
+        "personal_history_diet",
+        "personal_history_sleep",
+        "tab_exam",
+        "vitals_sec",
+        "height_cm",
+        "weight_kg",
+        "bp",
+        "temp",
+        "pr",
+        "rr",
+        "col_break_vitals",
+        "wrist_cm",
+        "waist_cm",
+        "fore_arm_cm",
+        "hip_cm",
+        "exam_sec",
+        "general_examination",
+        "col_break_exam",
+        "systemic_examination",
+        "clinical_sec",
+        "vpk_dominance",
+        "pulse_diagnosis",
+        "sgp_pulse_table",
+        "col_break_1",
+        "ayurvedic_diagnosis",
+        "allopathic_diagnosis",
+        "review_of_systems",
+        "investigation_reports",
+        "tab_treatment",
+        "supplements_table_sec",
+        "sgp_supplements_table",
+        "treatment_sec",
+        "sgp_rx",
+        "panchakarma",
+        "col_break_2",
+        "allopathic_medicines",
+        "detox_procedures",
+        "diet_sec",
+        "diet_include",
+        "diet_exclude",
+        "sgp_diet_weeks",
+        "col_break_3",
+        "exercises_yoga",
+        "home_remedies",
+        "lifestyle_advice",
+        "investigations_advised",
+        "tab_summary",
+        "rx_summary_sec",
+        "rx_quick_summary",
+        "rx_daily_regimen",
+        "col_break_regimen",
+        "oil_applications",
+        "breathing_exercises",
+        "followup_sec",
+        "follow_up",
+        "col_break_followup",
+        "followup_doc",
+        "prognosis",
+        "tab_raw",
+        "notes_sec",
+        "notes"
+    ],
+    "fields": [
+        {
+            "fieldname": "tab_history",
+            "fieldtype": "Tab Break",
+            "label": "Context & History"
+        },
+        {
+            "fieldname": "naming_series",
+            "fieldtype": "Select",
+            "label": "Naming Series",
+            "options": "SGP-ENC-.YYYY.-.#####",
+            "reqd": 1
+        },
+        {
+            "fieldname": "patient",
+            "fieldtype": "Link",
+            "label": "Patient",
+            "options": "Patient",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fetch_from": "patient.patient_name",
+            "fieldname": "patient_name",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Patient Name"
+        },
+        {
+            "fieldname": "age",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Age"
+        },
+        {
+            "fetch_from": "patient.sex",
+            "fieldname": "gender",
+            "fieldtype": "Data",
+            "label": "Gender"
+        },
+        {
+            "fetch_from": "patient.mobile",
+            "fieldname": "mobile",
+            "fieldtype": "Data",
+            "label": "Mobile"
+        },
+        {
+            "fieldname": "doctor",
+            "fieldtype": "Link",
+            "label": "Practitioner",
+            "options": "Healthcare Practitioner",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "encounter_date",
+            "fieldtype": "Datetime",
+            "label": "Encounter Date",
+            "reqd": 1,
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "review_after",
+            "fieldtype": "Data",
+            "label": "Review After",
+            "description": "Shown on the print format header row. Manual value here always takes priority over any AI-suggested review_after value."
+        },
+        {
+            "fieldname": "status",
+            "fieldtype": "Select",
+            "label": "Status",
+            "options": "Draft\nUnder Review\nApproved\nClosed",
+            "default": "Draft",
+            "in_list_view": 1
+        },
+        {
+            "fieldname": "case_type",
+            "fieldtype": "Select",
+            "label": "Case Type",
+            "options": "\nAyurvedic\nAllopathic\nIntegrated"
+        },
+        {
+            "fieldname": "lead",
+            "fieldtype": "Link",
+            "label": "SGP Lead",
+            "options": "SGP Lead"
+        },
+        {
+            "fieldname": "appointment",
+            "fieldtype": "Link",
+            "label": "Appointment",
+            "options": "Patient Appointment"
+        },
+        {
+            "fieldname": "consent_verified",
+            "fieldtype": "Check",
+            "label": "Consent Verified"
+        },
+        {
+            "fieldname": "custom_payment_entry",
+            "fieldtype": "Link",
+            "label": "Payment Entry",
+            "options": "Payment Entry"
+        },
+        {
+            "fieldname": "custom_paid_amount",
+            "fieldtype": "Currency",
+            "label": "Paid Amount"
+        },
+        {
+            "fieldname": "amended_from",
+            "fieldtype": "Link",
+            "label": "Amended From",
+            "no_copy": 1,
+            "options": "SGP Encounter"
+        },
+        {
+            "fieldname": "chief_complaint_sec",
+            "fieldtype": "Section Break",
+            "label": "Chief Complaint"
+        },
+        {
+            "fieldname": "chief_complaint",
+            "fieldtype": "Small Text",
+            "label": "Chief Complaint"
+        },
+        {
+            "fieldname": "anamnesis",
+            "fieldtype": "Text",
+            "label": "Anamnesis"
+        },
+        {
+            "fieldname": "history_sec",
+            "fieldtype": "Section Break",
+            "label": "Comprehensive Patient History"
+        },
+        {
+            "fieldname": "past_medical_history",
+            "fieldtype": "Small Text",
+            "label": "Past Medical History"
+        },
+        {
+            "fieldname": "medication_history",
+            "fieldtype": "Small Text",
+            "label": "Medication & Treatment History"
+        },
+        {
+            "fieldname": "col_break_4",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "surgical_history",
+            "fieldtype": "Small Text",
+            "label": "Surgical & Hospitalization History"
+        },
+        {
+            "fieldname": "menstrual_obstetric_history",
+            "fieldtype": "Small Text",
+            "label": "Menstrual / Obstetric History"
+        },
+        {
+            "fieldname": "family_history",
+            "fieldtype": "Small Text",
+            "label": "Family History"
+        },
+        {
+            "fieldname": "allergies",
+            "fieldtype": "Small Text",
+            "label": "Allergies"
+        },
+        {
+            "fieldname": "personal_history_diet",
+            "fieldtype": "Small Text",
+            "label": "Diet History"
+        },
+        {
+            "fieldname": "personal_history_sleep",
+            "fieldtype": "Data",
+            "label": "Sleep (hrs/night)"
+        },
+        {
+            "fieldname": "tab_exam",
+            "fieldtype": "Tab Break",
+            "label": "Examination & Nadi Pariksha"
+        },
+        {
+            "fieldname": "vitals_sec",
+            "fieldtype": "Section Break",
+            "label": "Vitals & Anthropometry"
+        },
+        {
+            "fieldname": "height_cm",
+            "fieldtype": "Float",
+            "label": "Height (cm)"
+        },
+        {
+            "fieldname": "weight_kg",
+            "fieldtype": "Float",
+            "label": "Weight (kg)"
+        },
+        {
+            "fieldname": "bp",
+            "fieldtype": "Data",
+            "label": "Blood Pressure (BP)"
+        },
+        {
+            "fieldname": "temp",
+            "fieldtype": "Data",
+            "label": "Temperature"
+        },
+        {
+            "fieldname": "pr",
+            "fieldtype": "Data",
+            "label": "Pulse Rate (PR)"
+        },
+        {
+            "fieldname": "rr",
+            "fieldtype": "Data",
+            "label": "Respiratory Rate (RR)"
+        },
+        {
+            "fieldname": "col_break_vitals",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "wrist_cm",
+            "fieldtype": "Float",
+            "label": "Wrist (cm)"
+        },
+        {
+            "fieldname": "waist_cm",
+            "fieldtype": "Float",
+            "label": "Waist (cm)"
+        },
+        {
+            "fieldname": "fore_arm_cm",
+            "fieldtype": "Float",
+            "label": "Forearm (cm)"
+        },
+        {
+            "fieldname": "hip_cm",
+            "fieldtype": "Float",
+            "label": "Hip (cm)"
+        },
+        {
+            "fieldname": "exam_sec",
+            "fieldtype": "Section Break",
+            "label": "Physical Examination"
+        },
+        {
+            "fieldname": "general_examination",
+            "fieldtype": "Small Text",
+            "label": "General Examination"
+        },
+        {
+            "fieldname": "col_break_exam",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "systemic_examination",
+            "fieldtype": "Small Text",
+            "label": "Systemic Examination"
+        },
+        {
+            "fieldname": "clinical_sec",
+            "fieldtype": "Section Break",
+            "label": "Diagnostic Assessment & Nadi Pariksha"
+        },
+        {
+            "fieldname": "vpk_dominance",
+            "fieldtype": "Data",
+            "label": "VPK Dominance"
+        },
+        {
+            "fieldname": "pulse_diagnosis",
+            "fieldtype": "Small Text",
+            "label": "Pulse Diagnosis"
+        },
+        {
+            "fieldname": "sgp_pulse_table",
+            "fieldtype": "Table",
+            "label": "Pulse Diagnosis Grid",
+            "options": "SGP Pulse Item"
+        },
+        {
+            "fieldname": "col_break_1",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "ayurvedic_diagnosis",
+            "fieldtype": "Small Text",
+            "label": "Ayurvedic Diagnosis"
+        },
+        {
+            "fieldname": "allopathic_diagnosis",
+            "fieldtype": "Small Text",
+            "label": "Allopathic Diagnosis"
+        },
+        {
+            "fieldname": "review_of_systems",
+            "fieldtype": "Small Text",
+            "label": "Review of Systems"
+        },
+        {
+            "fieldname": "investigation_reports",
+            "fieldtype": "Small Text",
+            "label": "Investigation Reports (Brought)"
+        },
+        {
+            "fieldname": "tab_treatment",
+            "fieldtype": "Tab Break",
+            "label": "Treatment & Regimen"
+        },
+        {
+            "fieldname": "supplements_table_sec",
+            "fieldtype": "Section Break",
+            "label": "SGP Supplements & Regimen Table (8-Week Matrix)"
+        },
+        {
+            "fieldname": "sgp_supplements_table",
+            "fieldtype": "Table",
+            "label": "SGP Supplements & Regimen Table",
+            "options": "SGP Supplement Item"
+        },
+        {
+            "fieldname": "treatment_sec",
+            "fieldtype": "Section Break",
+            "label": "Prescriptions Summary Text & Therapies"
+        },
+        {
+            "fieldname": "sgp_rx",
+            "fieldtype": "Text",
+            "label": "SGP Supplements (Rx)"
+        },
+        {
+            "fieldname": "panchakarma",
+            "fieldtype": "Text",
+            "label": "Panchakarma"
+        },
+        {
+            "fieldname": "col_break_2",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "allopathic_medicines",
+            "fieldtype": "Text",
+            "label": "Allopathic Medicines"
+        },
+        {
+            "fieldname": "detox_procedures",
+            "fieldtype": "Text",
+            "label": "Detoxifying Procedures & Decoctions"
+        },
+        {
+            "fieldname": "diet_sec",
+            "fieldtype": "Section Break",
+            "label": "Diet & Lifestyle Plan"
+        },
+        {
+            "fieldname": "diet_include",
+            "fieldtype": "Small Text",
+            "label": "Diet — Include"
+        },
+        {
+            "fieldname": "diet_exclude",
+            "fieldtype": "Small Text",
+            "label": "Diet — Exclude"
+        },
+        {
+            "fieldname": "sgp_diet_weeks",
+            "fieldtype": "Table",
+            "label": "Diet Schedule by Week / Phase",
+            "options": "SGP Diet Week Item",
+            "description": "Add weekly diet phases. Rendered directly from this table in the 'Dietary and Lifestyle Plan' section of the print format (does not go through the Notes/AI JSON)."
+        },
+        {
+            "fieldname": "col_break_3",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "exercises_yoga",
+            "fieldtype": "Small Text",
+            "label": "Exercises & Yoga"
+        },
+        {
+            "fieldname": "home_remedies",
+            "fieldtype": "Small Text",
+            "label": "Home Remedies"
+        },
+        {
+            "fieldname": "lifestyle_advice",
+            "fieldtype": "Small Text",
+            "label": "Lifestyle Advice"
+        },
+        {
+            "fieldname": "investigations_advised",
+            "fieldtype": "Small Text",
+            "label": "Investigations Advised"
+        },
+        {
+            "fieldname": "tab_summary",
+            "fieldtype": "Tab Break",
+            "label": "Prescription Summary & Follow-Up"
+        },
+        {
+            "fieldname": "rx_summary_sec",
+            "fieldtype": "Section Break",
+            "label": "Executive Prescription Summary"
+        },
+        {
+            "fieldname": "rx_quick_summary",
+            "fieldtype": "Small Text",
+            "label": "Executive Summary"
+        },
+        {
+            "fieldname": "rx_daily_regimen",
+            "fieldtype": "Small Text",
+            "label": "Daily Regimen Instructions",
+            "description": "Free-text override. If filled, this whole block prints as-is instead of the two granular fields below."
+        },
+        {
+            "fieldname": "col_break_regimen",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "oil_applications",
+            "fieldtype": "Small Text",
+            "label": "Oil Applications"
+        },
+        {
+            "fieldname": "breathing_exercises",
+            "fieldtype": "Small Text",
+            "label": "Breathing Exercises"
+        },
+        {
+            "fieldname": "followup_sec",
+            "fieldtype": "Section Break",
+            "label": "Care Continuity & Follow Up"
+        },
+        {
+            "fieldname": "follow_up",
+            "fieldtype": "Small Text",
+            "label": "Follow Up Plan"
+        },
+        {
+            "fieldname": "col_break_followup",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "followup_doc",
+            "fieldtype": "Data",
+            "label": "Follow-Up Doctor & Contact"
+        },
+        {
+            "fieldname": "prognosis",
+            "fieldtype": "Small Text",
+            "label": "Prognosis"
+        },
+        {
+            "fieldname": "tab_raw",
+            "fieldtype": "Tab Break",
+            "label": "Raw Casesheet Data"
+        },
+        {
+            "fieldname": "notes_sec",
+            "fieldtype": "Section Break",
+            "label": "Raw Casesheet JSON"
+        },
+        {
+            "fieldname": "notes",
+            "fieldtype": "Long Text",
+            "label": "Notes"
+        }
+    ],
+    "grid_page_length": 50,
+    "index_web_pages_for_search": 1,
+    "is_submittable": 1,
+    "links": [],
+    "modified": "2026-04-29 12:58:00.703136",
+    "modified_by": "Administrator",
+    "module": "SGP Clinical Core",
+    "name": "SGP Encounter",
+    "naming_rule": "By \"Naming Series\" field",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "Administrator",
+            "share": 1,
+            "submit": 1,
+            "write": 1
+        }
+    ],
+    "row_format": "Dynamic",
+    "rows_threshold_for_grid_search": 20,
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": []
 }

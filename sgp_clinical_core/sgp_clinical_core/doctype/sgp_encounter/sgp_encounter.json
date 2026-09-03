@@ -6,6 +6,8 @@
     "editable_grid": 1,
     "engine": "InnoDB",
     "field_order": [
+        "tab_patient_history",
+        "patient_history_html",
         "tab_history",
         "patient",
         "patient_name",
@@ -98,6 +100,17 @@
         "notes"
     ],
     "fields": [
+        {
+            "fieldname": "tab_patient_history",
+            "fieldtype": "Tab Break",
+            "label": "📋 Patient History"
+        },
+        {
+            "fieldname": "patient_history_html",
+            "fieldtype": "HTML",
+            "label": "Previous Encounter Timeline",
+            "options": "<div class=\"text-muted text-center p-3\">Select a patient to load their clinical history.</div>"
+        },
         {
             "fieldname": "tab_history",
             "fieldtype": "Tab Break",

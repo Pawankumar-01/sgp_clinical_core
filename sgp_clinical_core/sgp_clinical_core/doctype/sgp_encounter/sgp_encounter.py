@@ -297,3 +297,89 @@ class SGPEncounter(Document):
             old_doc = self.get_doc_before_save()
             if old_doc and old_doc.status == "Approved" and self.status == "Approved":
                 frappe.throw("Approved encounters cannot be edited.")
+
+
+# ══════════════════════════════════════════════════════════════════════════
+# PATIENT HISTORY API — serves the "📋 Patient History" tab
+# ══════════════════════════════════════════════════════════════════════════
+
+@frappe.whitelist()
+def get_patient_history(patient, exclude_encounter=None):
+    """Return previous SGP Encounters for a patient, ordered newest-first.
+
+    Called by the client-side JS in sgp_encounter.js to populate the
+    'Patient History' tab with a rich timeline of past visits.
+    """
+    if not patient:
+        return []
+
+    filters = {"patient": patient, "docstatus": ["in", [0, 1]]}
+    if exclude_encounter:
+        filters["name"] = ["!=", exclude_encounter]
+
+    encounters = frappe.get_all(
+        "SGP Encounter",
+        filters=filters,
+        fields=[
+            "name", "encounter_date", "status", "doctor", "case_type",
+            # Presenting complaints
+            "chief_complaint", "anamnesis",
+            # History
+            "past_medical_history", "medication_history",
+            "surgical_history", "allergies",
+            "family_history", "menstrual_obstetric_history",
+            "personal_history_diet", "personal_history_sleep",
+            # Vitals
+            "height_cm", "weight_kg", "bp", "temp", "pr", "rr",
+            # Examination
+            "general_examination", "systemic_examination",
+            # Assessment & Diagnosis
+            "vpk_dominance", "pulse_diagnosis",
+            "ayurvedic_diagnosis", "allopathic_diagnosis",
+            "review_of_systems", "investigation_reports",
+            # Treatment
+            "sgp_rx", "allopathic_medicines", "panchakarma",
+            "detox_procedures", "home_remedies",
+            "investigations_advised",
+            # Diet & Lifestyle
+            "diet_include", "diet_exclude",
+            "lifestyle_advice", "exercises_yoga",
+            # Summary
+            "rx_quick_summary", "rx_daily_regimen",
+            "oil_applications", "breathing_exercises",
+            # Follow-up
+            "follow_up", "prognosis", "followup_doc",
+            "review_after",
+        ],
+        order_by="encounter_date desc",
+        limit_page_length=50,
+    )
+
+    for enc in encounters:
+        # Supplement child table
+        enc["supplements"] = frappe.get_all(
+            "SGP Supplement Item",
+            filters={"parent": enc["name"]},
+            fields=[
+                "supplement_name", "quantity_mg", "frequency",
+                "start_week", "remarks_instructions",
+                "w1", "w2", "w3", "w4", "w5", "w6", "w7", "w8",
+            ],
+            order_by="idx",
+        )
+        # Pulse diagnosis child table
+        enc["pulse_items"] = frappe.get_all(
+            "SGP Pulse Item",
+            filters={"parent": enc["name"]},
+            fields=["system", "vata", "pitta", "kapha"],
+            order_by="idx",
+        )
+        # Resolve practitioner name
+        if enc.get("doctor"):
+            enc["doctor_name"] = frappe.db.get_value(
+                "Healthcare Practitioner", enc["doctor"], "practitioner_name"
+            ) or enc["doctor"]
+        else:
+            enc["doctor_name"] = ""
+
+    return encounters

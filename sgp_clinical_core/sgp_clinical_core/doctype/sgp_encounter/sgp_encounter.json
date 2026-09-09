@@ -227,8 +227,7 @@
         },
         {
             "fieldname": "chief_complaint_sec",
-            "fieldtype": "Section Break",
-            "label": "Chief Complaint"
+            "fieldtype": "Section Break"
         },
         {
             "fieldname": "chief_complaint",

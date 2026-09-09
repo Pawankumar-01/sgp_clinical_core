@@ -1,14 +1,4 @@
-// Copyright (c) 2026, Sai Ganga Panakeia and contributors
-// For license information, please see license.txt
-
-// ═══════════════════════════════════════════════════════════════════════════
-// SGP Encounter — Client Script
-// Populates the "📋 Patient History" tab with a rich timeline of the
-// patient's previous encounters so the doctor has full clinical context.
-// ═══════════════════════════════════════════════════════════════════════════
-
 frappe.ui.form.on("SGP Encounter", {
-
     refresh(frm) {
         _inject_history_styles();
         if (frm.doc.patient) {
@@ -26,8 +16,6 @@ frappe.ui.form.on("SGP Encounter", {
         }
     },
 });
-
-// ── Data fetching ────────────────────────────────────────────────────────
 
 function _load_patient_history(frm) {
     const wrapper = frm.fields_dict.patient_history_html;
@@ -61,8 +49,6 @@ function _load_patient_history(frm) {
     });
 }
 
-// ── Placeholder ──────────────────────────────────────────────────────────
-
 function _render_placeholder(frm, message) {
     const wrapper = frm.fields_dict.patient_history_html;
     if (!wrapper) return;
@@ -73,8 +59,6 @@ function _render_placeholder(frm, message) {
         </div>`
     );
 }
-
-// ── Timeline renderer ────────────────────────────────────────────────────
 
 function _render_timeline(frm, encounters) {
     const wrapper = frm.fields_dict.patient_history_html;
@@ -101,7 +85,6 @@ function _render_timeline(frm, encounters) {
     html += `</div></div>`;
     wrapper.$wrapper.html(html);
 
-    // Wire up collapse toggles
     wrapper.$wrapper.find(".sgp-ph-section-toggle").on("click", function () {
         const $this = $(this);
         const $body = $this.closest(".sgp-ph-section").find(".sgp-ph-section-body");
@@ -110,7 +93,6 @@ function _render_timeline(frm, encounters) {
         $icon.toggleClass("sgp-ph-chevron-open");
     });
 
-    // Wire up card header collapse (the entire card body)
     wrapper.$wrapper.find(".sgp-ph-card-toggle").on("click", function () {
         const $this = $(this);
         const $body = $this.closest(".sgp-ph-card").find(".sgp-ph-card-body");
@@ -129,16 +111,13 @@ function _render_encounter_card(enc, idx) {
     const caseType = enc.case_type || "";
     const isFirst = idx === 0;
 
-    // Build sections — only include non-empty ones
     const sections = [];
 
-    // 1. Chief Complaint & Anamnesis
     const complaints = [];
     if (enc.chief_complaint) complaints.push(_field("Chief Complaint", enc.chief_complaint));
     if (enc.anamnesis) complaints.push(_field("Anamnesis", enc.anamnesis));
     if (complaints.length) sections.push(_section("Presenting Complaints", complaints.join(""), isFirst));
 
-    // 2. Vitals
     const vitals = [];
     if (enc.height_cm) vitals.push(`<span class="sgp-ph-vital"><b>Ht:</b> ${enc.height_cm} cm</span>`);
     if (enc.weight_kg) vitals.push(`<span class="sgp-ph-vital"><b>Wt:</b> ${enc.weight_kg} kg</span>`);
@@ -148,7 +127,6 @@ function _render_encounter_card(enc, idx) {
     if (enc.rr) vitals.push(`<span class="sgp-ph-vital"><b>RR:</b> ${enc.rr}</span>`);
     if (vitals.length) sections.push(_section("Vitals", `<div class="sgp-ph-vitals-row">${vitals.join("")}</div>`, isFirst));
 
-    // 3. Assessment & Diagnosis
     const assess = [];
     if (enc.vpk_dominance) assess.push(_field("VPK Dominance", enc.vpk_dominance));
     if (enc.ayurvedic_diagnosis) assess.push(_field("Ayurvedic Diagnosis", enc.ayurvedic_diagnosis));
@@ -157,7 +135,6 @@ function _render_encounter_card(enc, idx) {
     if (enc.review_of_systems) assess.push(_field("Review of Systems", enc.review_of_systems));
     if (assess.length) sections.push(_section("Assessment & Diagnosis", assess.join(""), isFirst));
 
-    // 4. Pulse Diagnosis Table
     if (enc.pulse_items && enc.pulse_items.length) {
         let ptable = `<table class="sgp-ph-table">
             <thead><tr><th>System</th><th>Vata</th><th>Pitta</th><th>Kapha</th></tr></thead><tbody>`;
@@ -168,14 +145,12 @@ function _render_encounter_card(enc, idx) {
         sections.push(_section("Nadi Pariksha Grid", ptable, false));
     }
 
-    // 5. Examination
     const exam = [];
     if (enc.general_examination) exam.push(_field("General Examination", enc.general_examination));
     if (enc.systemic_examination) exam.push(_field("Systemic Examination", enc.systemic_examination));
     if (enc.investigation_reports) exam.push(_field("Investigation Reports (Brought)", enc.investigation_reports));
     if (exam.length) sections.push(_section("Examination", exam.join(""), false));
 
-    // 6. Treatment
     const treat = [];
     if (enc.rx_quick_summary) treat.push(_field("Rx Summary", enc.rx_quick_summary));
     if (enc.sgp_rx) treat.push(_field("SGP Supplements (Rx)", enc.sgp_rx));
@@ -186,7 +161,6 @@ function _render_encounter_card(enc, idx) {
     if (enc.investigations_advised) treat.push(_field("Investigations Advised", enc.investigations_advised));
     if (treat.length) sections.push(_section("Treatment & Prescriptions", treat.join(""), isFirst));
 
-    // 7. Supplements Table
     if (enc.supplements && enc.supplements.length) {
         let stable = `<table class="sgp-ph-table">
             <thead><tr><th>Supplement</th><th>Qty</th><th>Freq</th>
@@ -205,7 +179,6 @@ function _render_encounter_card(enc, idx) {
         sections.push(_section("Supplements (8-Week Matrix)", stable, false));
     }
 
-    // 8. Diet & Lifestyle
     const diet = [];
     if (enc.diet_include) diet.push(_field("Diet — Include", enc.diet_include));
     if (enc.diet_exclude) diet.push(_field("Diet — Exclude", enc.diet_exclude));
@@ -216,7 +189,6 @@ function _render_encounter_card(enc, idx) {
     if (enc.rx_daily_regimen) diet.push(_field("Daily Regimen", enc.rx_daily_regimen));
     if (diet.length) sections.push(_section("Diet & Lifestyle", diet.join(""), false));
 
-    // 9. History (from the encounter itself)
     const hist = [];
     if (enc.past_medical_history) hist.push(_field("Past Medical History", enc.past_medical_history));
     if (enc.medication_history) hist.push(_field("Medication History", enc.medication_history));
@@ -226,7 +198,6 @@ function _render_encounter_card(enc, idx) {
     if (enc.menstrual_obstetric_history) hist.push(_field("Menstrual/Obstetric History", enc.menstrual_obstetric_history));
     if (hist.length) sections.push(_section("Recorded Patient History", hist.join(""), false));
 
-    // 10. Follow-up
     const followup = [];
     if (enc.follow_up) followup.push(_field("Follow-Up Plan", enc.follow_up));
     if (enc.prognosis) followup.push(_field("Prognosis", enc.prognosis));
@@ -255,8 +226,6 @@ function _render_encounter_card(enc, idx) {
     `;
 }
 
-// ── Section builder (collapsible) ────────────────────────────────────────
-
 function _section(title, content, startOpen) {
     return `
         <div class="sgp-ph-section">
@@ -271,8 +240,6 @@ function _section(title, content, startOpen) {
     `;
 }
 
-// ── Field renderer ───────────────────────────────────────────────────────
-
 function _field(label, value) {
     if (!value) return "";
     const escaped = _esc(value);
@@ -283,8 +250,6 @@ function _field(label, value) {
         </div>
     `;
 }
-
-// ── Helpers ──────────────────────────────────────────────────────────────
 
 function _esc(val) {
     if (val === null || val === undefined) return "";
@@ -301,14 +266,11 @@ function _status_class(status) {
     return map[status] || "sgp-ph-status-draft";
 }
 
-// ── Inject CSS (idempotent) ──────────────────────────────────────────────
-
 function _inject_history_styles() {
     if (document.getElementById("sgp-patient-history-styles")) return;
     const style = document.createElement("style");
     style.id = "sgp-patient-history-styles";
     style.textContent = `
-        /* ── Container ─────────────────────────────────── */
         .sgp-ph-container {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             padding: 0;
@@ -339,8 +301,6 @@ function _inject_history_styles() {
             border-radius: 0 0 8px 8px;
             background: #f8fafc;
         }
-
-        /* ── Empty state ──────────────────────────────── */
         .sgp-ph-empty {
             text-align: center;
             padding: 48px 20px;
@@ -348,8 +308,6 @@ function _inject_history_styles() {
         }
         .sgp-ph-empty-icon { font-size: 40px; margin-bottom: 12px; }
         .sgp-ph-empty-text { font-size: 14px; }
-
-        /* ── Card ─────────────────────────────────────── */
         .sgp-ph-card {
             border-bottom: 1px solid #e2e8f0;
             background: #fff;
@@ -408,8 +366,6 @@ function _inject_history_styles() {
         .sgp-ph-card-body {
             padding: 0 16px 12px 16px;
         }
-
-        /* ── Status badges ────────────────────────────── */
         .sgp-ph-badge {
             font-size: 11px;
             font-weight: 600;
@@ -422,8 +378,6 @@ function _inject_history_styles() {
         .sgp-ph-status-review { background: #dbeafe; color: #1e40af; }
         .sgp-ph-status-approved { background: #d1fae5; color: #065f46; }
         .sgp-ph-status-closed { background: #e2e8f0; color: #475569; }
-
-        /* ── Chevron ──────────────────────────────────── */
         .sgp-ph-chevron {
             display: inline-block;
             font-size: 10px;
@@ -433,8 +387,6 @@ function _inject_history_styles() {
             text-align: center;
         }
         .sgp-ph-chevron-open { transform: rotate(90deg); }
-
-        /* ── Section (collapsible) ────────────────────── */
         .sgp-ph-section {
             margin-top: 6px;
             border: 1px solid #e2e8f0;
@@ -463,8 +415,6 @@ function _inject_history_styles() {
             padding: 8px 12px;
             border-top: 1px solid #e2e8f0;
         }
-
-        /* ── Field ────────────────────────────────────── */
         .sgp-ph-field {
             margin-bottom: 8px;
         }
@@ -483,8 +433,6 @@ function _inject_history_styles() {
             line-height: 1.5;
             white-space: pre-line;
         }
-
-        /* ── Vitals row ───────────────────────────────── */
         .sgp-ph-vitals-row {
             display: flex;
             flex-wrap: wrap;
@@ -497,8 +445,6 @@ function _inject_history_styles() {
             border-radius: 6px;
             color: #334155;
         }
-
-        /* ── Tables ───────────────────────────────────── */
         .sgp-ph-table {
             width: 100%;
             border-collapse: collapse;
@@ -521,8 +467,6 @@ function _inject_history_styles() {
             color: #334155;
         }
         .sgp-ph-table tr:nth-child(even) td { background: #f8fafc; }
-
-        /* ── Loading ──────────────────────────────────── */
         .sgp-ph-loading {
             color: #64748b;
             font-size: 13px;
